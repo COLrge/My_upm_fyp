@@ -200,6 +200,16 @@ public class SysRoleController extends BaseController
         List<SysUser> list = userService.selectAllocatedList(user);
         return getDataTable(list);
     }
+    /**
+     * 查询已分配用户角色下拉列表 不分页
+     * */
+
+    @GetMapping("/dropdownListUser")
+    public AjaxResult dropdownListUser(SysUser user)
+    {
+        List<SysUser> list = userService.selectAllocatedList(user);
+        return AjaxResult.success(list);
+    }
 
     /**
      * 查询未分配用户角色列表

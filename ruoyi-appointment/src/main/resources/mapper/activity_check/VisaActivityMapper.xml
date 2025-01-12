@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.appointment.mapper.VisaActivityMapper">
+    
+    <resultMap type="VisaActivity" id="VisaActivityResult">
+        <result property="id"    column="id"    />
+        <result property="activityName"    column="activity_name"    />
+        <result property="activityContent"    column="activity_content"    />
+        <result property="openTime"    column="open_time"    />
+        <result property="activityImage"    column="activity_image"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="closeTime"    column="close_time"    />
+    </resultMap>
+
+    <sql id="selectVisaActivityVo">
+        select id, activity_name, activity_content, open_time, activity_image, create_by, create_time, update_by, update_time, remark, close_time from visa_activity
+    </sql>
+
+    <select id="selectVisaActivityList" parameterType="VisaActivity" resultMap="VisaActivityResult">
+        <include refid="selectVisaActivityVo"/>
+        <where>  
+            <if test="activityName != null  and activityName != ''"> and activity_name like concat('%', #{activityName}, '%')</if>
+            <if test="activityContent != null  and activityContent != ''"> and activity_content like concat('%', #{activityContent}, '%')</if>
+            <if test="openTime != null "> and open_time &gt;= #{openTime}</if>
+            <if test="closeTime != null "> and close_time &lt;= #{closeTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectVisaActivityById" parameterType="Long" resultMap="VisaActivityResult">
+        <include refid="selectVisaActivityVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertVisaActivity" parameterType="VisaActivity" useGeneratedKeys="true" keyProperty="id">
+        insert into visa_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityName != null and activityName != ''">activity_name,</if>
+            <if test="activityContent != null">activity_content,</if>
+            <if test="openTime != null">open_time,</if>
+            <if test="activityImage != null">activity_image,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="closeTime != null">close_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityName != null and activityName != ''">#{activityName},</if>
+            <if test="activityContent != null">#{activityContent},</if>
+            <if test="openTime != null">#{openTime},</if>
+            <if test="activityImage != null">#{activityImage},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="closeTime != null">#{closeTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVisaActivity" parameterType="VisaActivity">
+        update visa_activity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="activityName != null and activityName != ''">activity_name = #{activityName},</if>
+            <if test="activityContent != null">activity_content = #{activityContent},</if>
+            <if test="openTime != null">open_time = #{openTime},</if>
+            <if test="activityImage != null">activity_image = #{activityImage},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="closeTime != null">close_time = #{closeTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVisaActivityById" parameterType="Long">
+        delete from visa_activity where id = #{id}
+    </delete>
+
+    <delete id="deleteVisaActivityByIds" parameterType="String">
+        delete from visa_activity where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
