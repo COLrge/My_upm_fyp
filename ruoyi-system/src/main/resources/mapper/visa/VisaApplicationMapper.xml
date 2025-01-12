@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.visa.mapper.VisaApplicationMapper">
+    
+    <resultMap type="VisaApplication" id="VisaApplicationResult">
+        <result property="id"    column="id"    />
+        <result property="applicantId"    column="applicant_id"    />
+        <result property="name"    column="name"    />
+        <result property="matricNumber"    column="matric_number"    />
+        <result property="passportNumber"    column="passport_number"    />
+        <result property="email"    column="email"    />
+        <result property="malaysiaAddress"    column="malaysia_address"    />
+        <result property="overseasAddress"    column="overseas_address"    />
+        <result property="courseLevel"    column="course_level"    />
+        <result property="nationality"    column="nationality"    />
+        <result property="mobileNumber"    column="mobile_number"    />
+        <result property="applicationLocation"    column="application_location"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="facultyName"    column="faculty_name"    />
+        <result property="supervisorName"    column="supervisor_name"    />
+        <result property="sponsorshipStatus"    column="sponsorship_status"    />
+        <result property="studyStatus"    column="study_status"    />
+        <result property="maritalStatus"    column="marital_status"    />
+        <result property="dateOfBirth"    column="date_of_birth"    />
+        <result property="currentPassValidity"    column="current_pass_validity"    />
+        <result property="travelDocumentIssueDate"    column="travel_document_issue_date"    />
+        <result property="travelDocumentExpiryDate"    column="travel_document_expiry_date"    />
+        <result property="lastEntryDate"    column="last_entry_date"    />
+        <result property="travelDocumentType"    column="travel_document_type"    />
+        <result property="currentPassType"    column="current_pass_type"    />
+        <result property="insuranceCompany"    column="insurance_company"    />
+        <result property="status"    column="status"    />
+        <result property="reviewerId"    column="reviewer_id"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="boardingPassImg"    column="boarding_pass_img"    />
+        <result property="passportImg"    column="passport_img"    />
+        <result property="oldPassportImg"    column="old_passport_img"    />
+        <result property="registrationSlipImg"    column="registration_slip_img"    />
+        <result property="academicResultImg"    column="academic_result_img"    />
+        <result property="attendanceReportImg"    column="attendance_report_img"    />
+        <result property="progressReportImg"    column="progress_report_img"    />
+        <result property="supportingLetterImg"    column="supporting_letter_img"    />
+        <result property="emgsPaymentImg"    column="emgs_payment_img"    />
+        <result property="upmPaymentImg"    column="upm_payment_img"    />
+        <result property="insuranceCoverNoteImg"    column="insurance_cover_note_img"    />
+    </resultMap>
+
+    <sql id="selectVisaApplicationVo">
+        select id, applicant_id, name, matric_number, passport_number, email, malaysia_address, overseas_address, course_level, nationality, mobile_number, application_location, course_name, faculty_name, supervisor_name, sponsorship_status, study_status, marital_status, date_of_birth, current_pass_validity, travel_document_issue_date, travel_document_expiry_date, last_entry_date, travel_document_type, current_pass_type, insurance_company, status, reviewer_id, remarks, created_at, updated_at, boarding_pass_img, passport_img, old_passport_img, registration_slip_img, academic_result_img, attendance_report_img, progress_report_img, supporting_letter_img, emgs_payment_img, upm_payment_img, insurance_cover_note_img from visa_application
+    </sql>
+
+    <select id="selectVisaApplicationList" parameterType="VisaApplication" resultMap="VisaApplicationResult">
+        <include refid="selectVisaApplicationVo"/>
+        <where>  
+            <if test="applicantId != null "> and applicant_id = #{applicantId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="matricNumber != null  and matricNumber != ''"> and matric_number = #{matricNumber}</if>
+            <if test="passportNumber != null  and passportNumber != ''"> and passport_number = #{passportNumber}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="malaysiaAddress != null  and malaysiaAddress != ''"> and malaysia_address = #{malaysiaAddress}</if>
+            <if test="overseasAddress != null  and overseasAddress != ''"> and overseas_address = #{overseasAddress}</if>
+            <if test="courseLevel != null  and courseLevel != ''"> and course_level = #{courseLevel}</if>
+            <if test="nationality != null  and nationality != ''"> and nationality = #{nationality}</if>
+            <if test="mobileNumber != null  and mobileNumber != ''"> and mobile_number = #{mobileNumber}</if>
+            <if test="applicationLocation != null  and applicationLocation != ''"> and application_location = #{applicationLocation}</if>
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="facultyName != null  and facultyName != ''"> and faculty_name like concat('%', #{facultyName}, '%')</if>
+            <if test="supervisorName != null  and supervisorName != ''"> and supervisor_name like concat('%', #{supervisorName}, '%')</if>
+            <if test="sponsorshipStatus != null  and sponsorshipStatus != ''"> and sponsorship_status = #{sponsorshipStatus}</if>
+            <if test="studyStatus != null  and studyStatus != ''"> and study_status = #{studyStatus}</if>
+            <if test="maritalStatus != null  and maritalStatus != ''"> and marital_status = #{maritalStatus}</if>
+            <if test="dateOfBirth != null "> and date_of_birth = #{dateOfBirth}</if>
+            <if test="currentPassValidity != null "> and current_pass_validity = #{currentPassValidity}</if>
+            <if test="travelDocumentIssueDate != null "> and travel_document_issue_date = #{travelDocumentIssueDate}</if>
+            <if test="travelDocumentExpiryDate != null "> and travel_document_expiry_date = #{travelDocumentExpiryDate}</if>
+            <if test="lastEntryDate != null "> and last_entry_date = #{lastEntryDate}</if>
+            <if test="travelDocumentType != null  and travelDocumentType != ''"> and travel_document_type = #{travelDocumentType}</if>
+            <if test="currentPassType != null  and currentPassType != ''"> and current_pass_type = #{currentPassType}</if>
+            <if test="insuranceCompany != null  and insuranceCompany != ''"> and insurance_company = #{insuranceCompany}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="reviewerId != null "> and reviewer_id = #{reviewerId}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+            <if test="updatedAt != null "> and updated_at = #{updatedAt}</if>
+            <if test="boardingPassImg != null  and boardingPassImg != ''"> and boarding_pass_img = #{boardingPassImg}</if>
+            <if test="passportImg != null  and passportImg != ''"> and passport_img = #{passportImg}</if>
+            <if test="oldPassportImg != null  and oldPassportImg != ''"> and old_passport_img = #{oldPassportImg}</if>
+            <if test="registrationSlipImg != null  and registrationSlipImg != ''"> and registration_slip_img = #{registrationSlipImg}</if>
+            <if test="academicResultImg != null  and academicResultImg != ''"> and academic_result_img = #{academicResultImg}</if>
+            <if test="attendanceReportImg != null  and attendanceReportImg != ''"> and attendance_report_img = #{attendanceReportImg}</if>
+            <if test="progressReportImg != null  and progressReportImg != ''"> and progress_report_img = #{progressReportImg}</if>
+            <if test="supportingLetterImg != null  and supportingLetterImg != ''"> and supporting_letter_img = #{supportingLetterImg}</if>
+            <if test="emgsPaymentImg != null  and emgsPaymentImg != ''"> and emgs_payment_img = #{emgsPaymentImg}</if>
+            <if test="upmPaymentImg != null  and upmPaymentImg != ''"> and upm_payment_img = #{upmPaymentImg}</if>
+            <if test="insuranceCoverNoteImg != null  and insuranceCoverNoteImg != ''"> and insurance_cover_note_img = #{insuranceCoverNoteImg}</if>
+        </where>
+    </select>
+
+    <select id="selectReviewerByApplicationId" parameterType="Long" resultType="com.ruoyi.common.core.domain.entity.SysUser">
+        select u.user_id as userId,u.avatar as avatar,u.nick_name as nickName,u.phonenumber,u.email
+        from sys_user u
+                 inner join visa_application v on v.reviewer_id = u.user_id
+        where v.id = #{id}
+    </select>
+    <select id="selectUnderReviewByUserId" parameterType="Long" resultMap="VisaApplicationResult">
+        <include refid="selectVisaApplicationVo"/>
+        <where>
+            applicant_id = #{userId}
+            AND status = 'UNDER_REVIEW'
+        </where>
+    </select>
+    <select id="selectVisaApplicationById" parameterType="Long" resultMap="VisaApplicationResult">
+        <include refid="selectVisaApplicationVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectActiveApplications" parameterType="VisaApplication" resultMap="VisaApplicationResult">
+        <include refid="selectVisaApplicationVo"/>
+        <where>
+            <if test="applicantId != null">
+                and applicant_id = #{applicantId}
+            </if>
+            and status in ('SUBMITTED','UNDER_REVIEW')
+        </where>
+    </select>
+
+    <insert id="insertVisaApplication" parameterType="VisaApplication" useGeneratedKeys="true" keyProperty="id">
+        insert into visa_application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applicantId != null">applicant_id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="matricNumber != null and matricNumber != ''">matric_number,</if>
+            <if test="passportNumber != null and passportNumber != ''">passport_number,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="malaysiaAddress != null and malaysiaAddress != ''">malaysia_address,</if>
+            <if test="overseasAddress != null and overseasAddress != ''">overseas_address,</if>
+            <if test="courseLevel != null and courseLevel != ''">course_level,</if>
+            <if test="nationality != null and nationality != ''">nationality,</if>
+            <if test="mobileNumber != null and mobileNumber != ''">mobile_number,</if>
+            <if test="applicationLocation != null and applicationLocation != ''">application_location,</if>
+            <if test="courseName != null and courseName != ''">course_name,</if>
+            <if test="facultyName != null and facultyName != ''">faculty_name,</if>
+            <if test="supervisorName != null and supervisorName != ''">supervisor_name,</if>
+            <if test="sponsorshipStatus != null">sponsorship_status,</if>
+            <if test="studyStatus != null and studyStatus != ''">study_status,</if>
+            <if test="maritalStatus != null and maritalStatus != ''">marital_status,</if>
+            <if test="dateOfBirth != null">date_of_birth,</if>
+            <if test="currentPassValidity != null">current_pass_validity,</if>
+            <if test="travelDocumentIssueDate != null">travel_document_issue_date,</if>
+            <if test="travelDocumentExpiryDate != null">travel_document_expiry_date,</if>
+            <if test="lastEntryDate != null">last_entry_date,</if>
+            <if test="travelDocumentType != null and travelDocumentType != ''">travel_document_type,</if>
+            <if test="currentPassType != null and currentPassType != ''">current_pass_type,</if>
+            <if test="insuranceCompany != null">insurance_company,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="reviewerId != null">reviewer_id,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="boardingPassImg != null">boarding_pass_img,</if>
+            <if test="passportImg != null">passport_img,</if>
+            <if test="oldPassportImg != null">old_passport_img,</if>
+            <if test="registrationSlipImg != null">registration_slip_img,</if>
+            <if test="academicResultImg != null">academic_result_img,</if>
+            <if test="attendanceReportImg != null">attendance_report_img,</if>
+            <if test="progressReportImg != null">progress_report_img,</if>
+            <if test="supportingLetterImg != null">supporting_letter_img,</if>
+            <if test="emgsPaymentImg != null">emgs_payment_img,</if>
+            <if test="upmPaymentImg != null">upm_payment_img,</if>
+            <if test="insuranceCoverNoteImg != null">insurance_cover_note_img,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="applicantId != null">#{applicantId},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="matricNumber != null and matricNumber != ''">#{matricNumber},</if>
+            <if test="passportNumber != null and passportNumber != ''">#{passportNumber},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="malaysiaAddress != null and malaysiaAddress != ''">#{malaysiaAddress},</if>
+            <if test="overseasAddress != null and overseasAddress != ''">#{overseasAddress},</if>
+            <if test="courseLevel != null and courseLevel != ''">#{courseLevel},</if>
+            <if test="nationality != null and nationality != ''">#{nationality},</if>
+            <if test="mobileNumber != null and mobileNumber != ''">#{mobileNumber},</if>
+            <if test="applicationLocation != null and applicationLocation != ''">#{applicationLocation},</if>
+            <if test="courseName != null and courseName != ''">#{courseName},</if>
+            <if test="facultyName != null and facultyName != ''">#{facultyName},</if>
+            <if test="supervisorName != null and supervisorName != ''">#{supervisorName},</if>
+            <if test="sponsorshipStatus != null">#{sponsorshipStatus},</if>
+            <if test="studyStatus != null and studyStatus != ''">#{studyStatus},</if>
+            <if test="maritalStatus != null and maritalStatus != ''">#{maritalStatus},</if>
+            <if test="dateOfBirth != null">#{dateOfBirth},</if>
+            <if test="currentPassValidity != null">#{currentPassValidity},</if>
+            <if test="travelDocumentIssueDate != null">#{travelDocumentIssueDate},</if>
+            <if test="travelDocumentExpiryDate != null">#{travelDocumentExpiryDate},</if>
+            <if test="lastEntryDate != null">#{lastEntryDate},</if>
+            <if test="travelDocumentType != null and travelDocumentType != ''">#{travelDocumentType},</if>
+            <if test="currentPassType != null and currentPassType != ''">#{currentPassType},</if>
+            <if test="insuranceCompany != null">#{insuranceCompany},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="reviewerId != null">#{reviewerId},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="boardingPassImg != null">#{boardingPassImg},</if>
+            <if test="passportImg != null">#{passportImg},</if>
+            <if test="oldPassportImg != null">#{oldPassportImg},</if>
+            <if test="registrationSlipImg != null">#{registrationSlipImg},</if>
+            <if test="academicResultImg != null">#{academicResultImg},</if>
+            <if test="attendanceReportImg != null">#{attendanceReportImg},</if>
+            <if test="progressReportImg != null">#{progressReportImg},</if>
+            <if test="supportingLetterImg != null">#{supportingLetterImg},</if>
+            <if test="emgsPaymentImg != null">#{emgsPaymentImg},</if>
+            <if test="upmPaymentImg != null">#{upmPaymentImg},</if>
+            <if test="insuranceCoverNoteImg != null">#{insuranceCoverNoteImg},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVisaApplication" parameterType="VisaApplication">
+        update visa_application
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="applicantId != null">applicant_id = #{applicantId},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="matricNumber != null and matricNumber != ''">matric_number = #{matricNumber},</if>
+            <if test="passportNumber != null and passportNumber != ''">passport_number = #{passportNumber},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="malaysiaAddress != null and malaysiaAddress != ''">malaysia_address = #{malaysiaAddress},</if>
+            <if test="overseasAddress != null and overseasAddress != ''">overseas_address = #{overseasAddress},</if>
+            <if test="courseLevel != null and courseLevel != ''">course_level = #{courseLevel},</if>
+            <if test="nationality != null and nationality != ''">nationality = #{nationality},</if>
+            <if test="mobileNumber != null and mobileNumber != ''">mobile_number = #{mobileNumber},</if>
+            <if test="applicationLocation != null and applicationLocation != ''">application_location = #{applicationLocation},</if>
+            <if test="courseName != null and courseName != ''">course_name = #{courseName},</if>
+            <if test="facultyName != null and facultyName != ''">faculty_name = #{facultyName},</if>
+            <if test="supervisorName != null and supervisorName != ''">supervisor_name = #{supervisorName},</if>
+            <if test="sponsorshipStatus != null">sponsorship_status = #{sponsorshipStatus},</if>
+            <if test="studyStatus != null and studyStatus != ''">study_status = #{studyStatus},</if>
+            <if test="maritalStatus != null and maritalStatus != ''">marital_status = #{maritalStatus},</if>
+            <if test="dateOfBirth != null">date_of_birth = #{dateOfBirth},</if>
+            <if test="currentPassValidity != null">current_pass_validity = #{currentPassValidity},</if>
+            <if test="travelDocumentIssueDate != null">travel_document_issue_date = #{travelDocumentIssueDate},</if>
+            <if test="travelDocumentExpiryDate != null">travel_document_expiry_date = #{travelDocumentExpiryDate},</if>
+            <if test="lastEntryDate != null">last_entry_date = #{lastEntryDate},</if>
+            <if test="travelDocumentType != null and travelDocumentType != ''">travel_document_type = #{travelDocumentType},</if>
+            <if test="currentPassType != null and currentPassType != ''">current_pass_type = #{currentPassType},</if>
+            <if test="insuranceCompany != null">insurance_company = #{insuranceCompany},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="reviewerId != null">reviewer_id = #{reviewerId},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="boardingPassImg != null">boarding_pass_img = #{boardingPassImg},</if>
+            <if test="passportImg != null">passport_img = #{passportImg},</if>
+            <if test="oldPassportImg != null">old_passport_img = #{oldPassportImg},</if>
+            <if test="registrationSlipImg != null">registration_slip_img = #{registrationSlipImg},</if>
+            <if test="academicResultImg != null">academic_result_img = #{academicResultImg},</if>
+            <if test="attendanceReportImg != null">attendance_report_img = #{attendanceReportImg},</if>
+            <if test="progressReportImg != null">progress_report_img = #{progressReportImg},</if>
+            <if test="supportingLetterImg != null">supporting_letter_img = #{supportingLetterImg},</if>
+            <if test="emgsPaymentImg != null">emgs_payment_img = #{emgsPaymentImg},</if>
+            <if test="upmPaymentImg != null">upm_payment_img = #{upmPaymentImg},</if>
+            <if test="insuranceCoverNoteImg != null">insurance_cover_note_img = #{insuranceCoverNoteImg},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVisaApplicationById" parameterType="Long">
+        delete from visa_application where id = #{id}
+    </delete>
+
+    <delete id="deleteVisaApplicationByIds" parameterType="String">
+        delete from visa_application where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
