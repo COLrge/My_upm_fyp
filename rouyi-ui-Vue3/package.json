@@ -28,9 +28,11 @@
     "jsencrypt": "3.3.2",
     "nprogress": "0.2.0",
     "pinia": "2.1.7",
+    "qrcode.vue": "^3.6.0",
     "splitpanes": "3.1.5",
     "vue": "3.4.31",
     "vue-cropper": "1.1.1",
+    "vue-qr": "^4.0.9",
     "vue-router": "4.4.0",
     "vuex": "^4.0.2"
   },
