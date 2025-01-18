@@ -157,14 +157,11 @@
 import { ref, reactive, toRefs, getCurrentInstance } from 'vue';
 import { useRouter } from 'vue-router'; // 引入 Vue Router 的组合式 API
 import { listActivity, getActivity, delActivity, addActivity, updateActivity } from "@/api/activity_check/activity";
-import request from "@/utils/request.js";
 import { addAppointment_record } from "@/api/appointment_record/appointment_record.js";
-import { useStore } from 'vuex';
-import useUserStore from "../../../store/modules/user.js"; // 引入 Vuex 的 useStore 钩子
+import useUserStore from "@/store/modules/user.js";
 
 const { proxy } = getCurrentInstance();
 const router = useRouter();
-const store = useStore(); // 获取 Vuex Store 实例
 
 const activityList = ref([]);
 const open = ref(false);
@@ -293,6 +290,9 @@ const book = async (row) => {
       // 从 Vuex Store 获取用户信息
       const userId = userStore.id; // 用户ID
       const userName = userStore.name; // 用户名
+      const roles = userStore.roles
+
+      //转换数据类型
 
       // 构造新预约记录
       const newRecord = {
@@ -300,6 +300,7 @@ const book = async (row) => {
         appointmentName: row.activityName,
         userId: userId,
         userName: userName,
+        roleId: "2",
         appointmentTime: '1',
       };
 
@@ -312,7 +313,7 @@ const book = async (row) => {
       // 用户点击了取消，无需操作
       proxy.$message.info('Cancel creating');
     } else {
-      proxy.$message.error('creating fail');
+      proxy.$message.error('creating fail' + error.message);
     }
   }
 };

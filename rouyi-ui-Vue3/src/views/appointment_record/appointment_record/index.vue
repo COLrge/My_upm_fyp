@@ -123,6 +123,7 @@
 
 <script setup name="Appointment_record">
 import { listAppointment_record, getAppointment_record, delAppointment_record, addAppointment_record, updateAppointment_record } from "@/api/appointment_record/appointment_record";
+import useUserStore from "@/store/modules/user.js";
 
 const { proxy } = getCurrentInstance();
 const { visa_appointment_time } = proxy.useDict('visa_appointment_time');
@@ -167,13 +168,41 @@ const data = reactive({
 const { queryParams, form, rules } = toRefs(data);
 
 /** 查询Appointment list列表 */
-function getList() {
-  loading.value = true;
-  listAppointment_record(queryParams.value).then(response => {
-    appointment_recordList.value = response.rows;
-    total.value = response.total;
+const userStore = useUserStore();
+
+// 确保将 ID 转换为 BigInt 进行比较
+const ADMIN_IDS = [BigInt(1), BigInt(5)];
+
+async function getList() {
+  // 确保用户信息已加载
+  if (!userStore.id || !userStore.name) {
+    await userStore.getInfo();
+  }
+
+  // 确保 currentUserId 是 BigInt 类型
+  const currentUserId = BigInt(userStore.id);
+
+  try {
+    loading.value = true;
+    const response = await listAppointment_record(queryParams.value);
+
+    // 检查是否是管理员用户
+    if (ADMIN_IDS.includes(currentUserId)) {
+      // 管理员可以查看所有记录
+      appointment_recordList.value = response.rows;
+      total.value = response.total;
+    } else {
+      // 普通用户只能查看自己的记录
+      const userAppointments = response.rows.filter(item => BigInt(item.userId) === currentUserId);
+      appointment_recordList.value = userAppointments;
+      total.value = userAppointments.length;
+    }
+  } catch (error) {
+    console.error('获取预约记录失败:', error);
+    // 可以添加错误提示
+  } finally {
     loading.value = false;
-  });
+  }
 }
 
 // 取消按钮
