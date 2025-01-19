@@ -100,7 +100,7 @@
         <el-form-item label="File Name" prop="fileName">
           <el-input v-model="form.fileName" placeholder="请输入File Name" />
         </el-form-item>
-        <el-form-item label="Submission Status" prop="submitStatus">
+        <el-form-item v-if="title !== '添加File Submission Status Table'" label="Submission Status" prop="submitStatus">
           <el-select v-model="form.submitStatus" placeholder="请选择Submission Status">
             <el-option
               v-for="dict in file_submit_state"
@@ -278,6 +278,7 @@ async function handleAdd() {
       // 自动填充当前用户信息
       form.value.userId = userStore.id; // 设置当前用户的 ID
       form.value.userName = userStore.name; // 设置当前用户的用户名
+      form.value.submitStatus = "1";
 
       open.value = true;
       title.value = "添加File Submission Status Table";
