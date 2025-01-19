@@ -124,6 +124,8 @@
 <script setup name="Appointment_record">
 import { listAppointment_record, getAppointment_record, delAppointment_record, addAppointment_record, updateAppointment_record } from "@/api/appointment_record/appointment_record";
 import useUserStore from "@/store/modules/user.js";
+import {getActivity} from "@/api/activity_check/activity.js";
+import {ElMessage} from "element-plus";
 
 const { proxy } = getCurrentInstance();
 const { visa_appointment_time } = proxy.useDict('visa_appointment_time');
@@ -257,14 +259,27 @@ function handleAdd() {
 }
 
 /** 修改按钮操作 */
-function handleUpdate(row) {
-  reset();
-  const _id = row.id || ids.value
-  getAppointment_record(_id).then(response => {
+async function handleUpdate(row) {
+  try {
+    // 获取活动的 open_time
+    const activityResponse = await getActivity(row.activityId);
+    const openTime = new Date(activityResponse.data.openTime);
+
+    if (new Date() >= openTime) {
+      ElMessage.error('已超过活动开放时间，无法修改');
+      return;
+    }
+
+    // 时间验证通过，执行修改操作
+    const _id = row.id;
+    const response = await getAppointment_record(_id);
+    reset();
     form.value = response.data;
     open.value = true;
     title.value = "修改Appointment list";
-  });
+  } catch (error) {
+    ElMessage.error('操作失败');
+  }
 }
 
 /** 提交按钮 */

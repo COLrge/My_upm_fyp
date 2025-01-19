@@ -127,6 +127,8 @@
 <script setup name="File_submit">
 import { listFile_submit, getFile_submit, delFile_submit, addFile_submit, updateFile_submit } from "@/api/file_submit/file_submit";
 import {ElMessage, ElMessageBox} from "element-plus";
+import {listApplication} from "@/api/system/application.js";
+import useUserStore from "@/store/modules/user.js";
 
 const { proxy } = getCurrentInstance();
 const { file_submit_state } = proxy.useDict('file_submit_state');
@@ -166,13 +168,40 @@ const idpin = (row, column, cellValue, index) => {
 };
 
 /** 查询File Submission Status Table列表 */
-function getList() {
-  loading.value = true;
-  listFile_submit(queryParams.value).then(response => {
-    file_submitList.value = response.rows;
-    total.value = response.total;
+const userStore = useUserStore();
+
+// 确保将 ID 转换为 BigInt 进行比较
+const ADMIN_IDS = [BigInt(1), BigInt(5)];
+
+async function getList() {
+  // 确保用户信息已加载
+  if (!userStore.id || !userStore.name) {
+    await userStore.getInfo();
+  }
+
+  // 确保 currentUserId 是 BigInt 类型
+  const currentUserId = BigInt(userStore.id);
+
+  try {
+    loading.value = true;
+    const response = await listFile_submit(queryParams.value);
+
+    // 检查是否是管理员用户
+    if (ADMIN_IDS.includes(currentUserId)) {
+      // 管理员可以查看所有记录
+      file_submitList.value = response.rows;
+      total.value = response.total;
+    } else {
+      // 普通用户只能查看自己的记录
+      const userSubmissions = response.rows.filter(item => BigInt(item.userId) === currentUserId);
+      file_submitList.value = userSubmissions;
+      total.value = userSubmissions.length;
+    }
+  } catch (error) {
+    console.error('获取提交记录失败:', error);
+  } finally {
     loading.value = false;
-  });
+  }
 }
 
 // 取消按钮
@@ -225,10 +254,40 @@ function handleSelectionChange(selection) {
 }
 
 /** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加File Submission Status Table";
+async function handleAdd() {
+  const userStore = useUserStore();
+  if (!userStore.id || !userStore.name) {
+    await userStore.getInfo();
+  }
+
+  try {
+    // 获取申请列表
+    const response = await listApplication();
+    const applications = response.rows || [];
+
+    // 查找当前用户的申请记录
+    const application = applications.find(item =>
+        String(item.applicantId) === String(userStore.id)
+    );
+    //console.log('查找的申请记录:', application);
+
+    // 验证状态
+    if (application?.status === 'APPROVED') {
+      reset();
+
+      // 自动填充当前用户信息
+      form.value.userId = userStore.id; // 设置当前用户的 ID
+      form.value.userName = userStore.name; // 设置当前用户的用户名
+
+      open.value = true;
+      title.value = "添加File Submission Status Table";
+    } else {
+      ElMessage.error("您的申请状态未被批准，无法进行新增操作");
+    }
+  } catch (error) {
+    console.error('获取申请列表失败:', error);
+    ElMessage.error('操作失败，请稍后重试');
+  }
 }
 
 /** 修改按钮操作 */
