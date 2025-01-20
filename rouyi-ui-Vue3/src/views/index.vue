@@ -5,7 +5,9 @@
       <template #header>
         <div class="card-header">
           <span>REVIEWER INFORMATION</span>
-          <el-button :icon="Refresh" circle @click="getReviewerInfo" />
+          <div class="button-container">
+            <el-button :icon="Refresh" circle @click="getReviewerInfo" />
+          </div>
         </div>
       </template>
 
@@ -72,11 +74,11 @@
       <template #header>
         <div class="card-header">
           <span>VISA EXPIRY REMINDER</span>
-          <div class="header-right">
+          <div class="button-container">
             <el-tooltip content="Visa validity period is 10 months" placement="top">
               <el-icon class="info-icon"><InfoFilled /></el-icon>
             </el-tooltip>
-            <el-button :icon="Refresh" circle @click="getVisaInfo" class="ml-10"/>
+            <el-button :icon="Refresh" circle @click="getVisaInfo" />
           </div>
         </div>
       </template>
@@ -144,15 +146,15 @@ const visaReminderText = computed(() => {
 });
 
 const handleAvatarError = () => {
-  ElMessage.warning('头像加载失败');
+  ElMessage.warning('Failed to load avatar.');
 };
 
 const copyToClipboard = async (text) => {
   try {
     await navigator.clipboard.writeText(text);
-    ElMessage.success('复制成功');
+    ElMessage.success('Copied successfully');
   } catch (err) {
-    ElMessage.error('复制失败');
+    ElMessage.error('Copy failed');
   }
 };
 
@@ -168,7 +170,7 @@ const getVisaExpiryInfo = async () => {
       visaDaysRemaining.value = null;
     }
   } catch (error) {
-    console.error('获取签证到期信息失败:', error);
+    console.error('Failed to fetch visa expiry info:', error);
     visaDaysRemaining.value = null;
   }
 };
@@ -181,10 +183,10 @@ const getReviewerInfo = async () => {
       reviewer.value = res.data;
       await getVisaExpiryInfo();
     } else {
-      ElMessage.error(res.msg || '获取审核员信息失败');
+      ElMessage.error(res.msg || 'Failed to fetch reviewer info');
     }
   } catch (error) {
-    ElMessage.error('获取审核员信息失败');
+    ElMessage.error('Failed to fetch reviewer info');
     console.error(error);
   } finally {
     loading.value = false;
@@ -197,14 +199,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* ... [Previous styles remain the same] */
-
 .visa-alert-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
   padding: 10px 0;
+  gap: 20px;
 }
 
 .visa-status {
@@ -217,6 +218,7 @@ onMounted(() => {
   padding: 8px 15px !important;
   height: auto !important;
   line-height: 1.5 !important;
+  margin-left: 20px; /* 增加额外的左侧间距 */
 }
 
 :deep(.el-alert__title) {
@@ -232,11 +234,15 @@ onMounted(() => {
   font-weight: 500;
 }
 
-.card-header span {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ... [Rest of the styles remain the same] */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 </style>

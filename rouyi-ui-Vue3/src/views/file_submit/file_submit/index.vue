@@ -1,66 +1,66 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="100px">
       <el-form-item label="File Name" prop="fileName">
         <el-input
-          v-model="queryParams.fileName"
-          placeholder="请输入File Name"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.fileName"
+            placeholder="Please enter file name"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="User ID" prop="userId">
         <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入User ID"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.userId"
+            placeholder="Please enter user ID"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-        <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery">Search</el-button>
+        <el-button icon="Refresh" @click="resetQuery">Reset</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['file_submit:file_submit:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['file_submit:file_submit:add']"
+        >Add</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['file_submit:file_submit:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['file_submit:file_submit:edit']"
+        >Edit</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['file_submit:file_submit:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['file_submit:file_submit:remove']"
+        >Delete</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['file_submit:file_submit:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['file_submit:file_submit:export']"
+        >Export</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -77,47 +77,47 @@
       <el-table-column label="User ID" align="center" prop="userId" />
       <el-table-column label="User Name" align="center" prop="userName" />
       <el-table-column label="Remarks" align="center" prop="remark" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['file_submit:file_submit:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['file_submit:file_submit:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['file_submit:file_submit:edit']">Edit</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['file_submit:file_submit:remove']">Delete</el-button>
           <el-button link type="success" icon="Share" @click="handleGenerateQR(scope.row)">Get QR</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
-    <!-- 添加或修改File Submission Status Table对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="file_submitRef" :model="form" :rules="rules" label-width="80px">
+    <!-- Add or Edit File Submission Status Table Dialog -->
+    <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+      <el-form ref="file_submitRef" :model="form" :rules="rules" label-width="150px">
         <el-form-item label="File Name" prop="fileName">
-          <el-input v-model="form.fileName" placeholder="请输入File Name" />
+          <el-input v-model="form.fileName" placeholder="Please enter file name" />
         </el-form-item>
-        <el-form-item v-if="title !== '添加File Submission Status Table'" label="Submission Status" prop="submitStatus">
-          <el-select v-model="form.submitStatus" placeholder="请选择Submission Status">
+        <el-form-item v-if="title !== 'Add File Submission Status Table'" label="Submission Status" prop="submitStatus">
+          <el-select v-model="form.submitStatus" placeholder="Please select submission status">
             <el-option
-              v-for="dict in file_submit_state"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value"
+                v-for="dict in file_submit_state"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
             ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="Remarks" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入Remarks" />
+          <el-input v-model="form.remark" placeholder="Please enter remarks" />
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+          <el-button type="primary" @click="submitForm">Confirm</el-button>
+          <el-button @click="cancel">Cancel</el-button>
         </div>
       </template>
     </el-dialog>
@@ -153,10 +153,10 @@ const data = reactive({
   },
   rules: {
     fileName: [
-      { required: true, message: "File Name不能为空", trigger: "blur" }
+      { required: true, message: "File Name cannot be empty", trigger: "blur" }
     ],
     submitStatus: [
-      { required: true, message: "Submission Status不能为空", trigger: "change" }
+      { required: true, message: "Submission Status cannot be empty", trigger: "change" }
     ],
   }
 });
@@ -167,50 +167,50 @@ const idpin = (row, column, cellValue, index) => {
   return row.id + 2025;
 };
 
-/** 查询File Submission Status Table列表 */
+/** Query File Submission Status Table List */
 const userStore = useUserStore();
 
-// 确保将 ID 转换为 BigInt 进行比较
+// Ensure ID is converted to BigInt for comparison
 const ADMIN_IDS = [BigInt(1), BigInt(5)];
 
 async function getList() {
-  // 确保用户信息已加载
+  // Ensure user info is loaded
   if (!userStore.id || !userStore.name) {
     await userStore.getInfo();
   }
 
-  // 确保 currentUserId 是 BigInt 类型
+  // Ensure currentUserId is BigInt
   const currentUserId = BigInt(userStore.id);
 
   try {
     loading.value = true;
     const response = await listFile_submit(queryParams.value);
 
-    // 检查是否是管理员用户
+    // Check if the user is an admin
     if (ADMIN_IDS.includes(currentUserId)) {
-      // 管理员可以查看所有记录
+      // Admin can view all records
       file_submitList.value = response.rows;
       total.value = response.total;
     } else {
-      // 普通用户只能查看自己的记录
+      // Regular users can only view their own records
       const userSubmissions = response.rows.filter(item => BigInt(item.userId) === currentUserId);
       file_submitList.value = userSubmissions;
       total.value = userSubmissions.length;
     }
   } catch (error) {
-    console.error('获取提交记录失败:', error);
+    console.error('Failed to fetch submission records:', error);
   } finally {
     loading.value = false;
   }
 }
 
-// 取消按钮
+// Cancel button
 function cancel() {
   open.value = false;
   reset();
 }
 
-// 表单重置
+// Form reset
 function reset() {
   form.value = {
     id: null,
@@ -227,33 +227,33 @@ function reset() {
   proxy.resetForm("file_submitRef");
 }
 
-/** generateQR */
+/** Generate QR */
 function handleGenerateQR(row) {
-  const idpinValue = idpin(row); // 调用 idpin 方法获取 idpin 值
+  const idpinValue = idpin(row); // Call idpin method to get idpin value
   const qrUrl = `http://localhost/submission/QR_submit?pin=${idpinValue}`;
-  window.location.href = qrUrl; // 跳转到生成 QR 的页面
+  window.location.href = qrUrl; // Redirect to QR generation page
 }
 
-/** 搜索按钮操作 */
+/** Search button operation */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** Reset button operation */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 
-// 多选框选中数据
+// Handle selection change
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
+/** Add button operation */
 async function handleAdd() {
   const userStore = useUserStore();
   if (!userStore.id || !userStore.name) {
@@ -261,76 +261,76 @@ async function handleAdd() {
   }
 
   try {
-    // 获取申请列表
+    // Get application list
     const response = await listApplication();
     const applications = response.rows || [];
 
-    // 查找当前用户的申请记录
+    // Find the current user's application record
     const application = applications.find(item =>
         String(item.applicantId) === String(userStore.id)
     );
-    //console.log('查找的申请记录:', application);
+    //console.log('Found application record:', application);
 
-    // 验证状态
+    // Validate status
     if (application?.status === 'APPROVED') {
       reset();
 
-      // 自动填充当前用户信息
-      form.value.userId = userStore.id; // 设置当前用户的 ID
-      form.value.userName = userStore.name; // 设置当前用户的用户名
+      // Auto-fill current user info
+      form.value.userId = userStore.id; // Set current user ID
+      form.value.userName = userStore.name; // Set current user name
       form.value.submitStatus = "1";
 
       open.value = true;
-      title.value = "添加File Submission Status Table";
+      title.value = "Add File Submission Status Table";
     } else {
-      ElMessage.error("您的申请状态未被批准，无法进行新增操作");
+      ElMessage.error("Your application status is not approved, cannot add new records");
     }
   } catch (error) {
-    console.error('获取申请列表失败:', error);
-    ElMessage.error('操作失败，请稍后重试');
+    console.error('Failed to fetch application list:', error);
+    ElMessage.error('Operation failed, please try again later');
   }
 }
 
-/** 修改按钮操作 */
+/** Edit button operation */
 function handleUpdate(row) {
   reset();
   const _id = row.id || ids.value;
 
-  ElMessageBox.prompt("请输入 PIN 以验证修改权限", "修改验证", {
+  ElMessageBox.prompt("Please enter PIN to verify edit permission", "Edit Verification", {
     inputType: "number",
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
   })
       .then(({ value }) => {
         if (parseInt(value) === _id) {
           getFile_submit(_id).then((response) => {
             form.value = response.data;
             open.value = true;
-            title.value = "修改 File Submission Status Table";
-            ElMessage.success("PIN 验证成功");
+            title.value = "Edit File Submission Status Table";
+            ElMessage.success("PIN verification successful");
           });
         } else {
-          ElMessage.error("PIN 不正确，无法进行修改");
+          ElMessage.error("Incorrect PIN, cannot proceed with edit");
         }
       })
       .catch(() => {
-        ElMessage.info("已取消修改操作");
+        ElMessage.info("Edit operation canceled");
       });
 }
 
-/** 提交按钮 */
+/** Submit form */
 function submitForm() {
   proxy.$refs["file_submitRef"].validate(valid => {
     if (valid) {
       if (form.value.id != null) {
         updateFile_submit(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          proxy.$modal.msgSuccess("Update successful");
           open.value = false;
           getList();
         });
       } else {
         addFile_submit(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          proxy.$modal.msgSuccess("Add successful");
           open.value = false;
           getList();
         });
@@ -339,18 +339,18 @@ function submitForm() {
   });
 }
 
-/** 删除按钮操作 */
+/** Delete button operation */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除File Submission Status Table编号为"' + _ids + '"的数据项？').then(function() {
+  proxy.$modal.confirm('Are you sure you want to delete the file submission with ID "' + _ids + '"?').then(function() {
     return delFile_submit(_ids);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    proxy.$modal.msgSuccess("Delete successful");
   }).catch(() => {});
 }
 
-/** 导出按钮操作 */
+/** Export button operation */
 function handleExport() {
   proxy.download('file_submit/file_submit/export', {
     ...queryParams.value

@@ -1,4 +1,5 @@
 <template>
+
   <el-dialog :title="title" v-model="dialogVisible" width="80%" append-to-body @close="closeDialog">
     <el-form ref="applicationRef" :model="form" :rules="rules" label-width="200px" :inline="true"
              class="demo-form-inline" :disabled="props.readonly">
@@ -242,7 +243,12 @@
             >
               <el-icon><Plus /></el-icon>
             </el-upload>
-            <view v-if="form.boardingPassImg"  @click="downloadFile(form.boardingPassImg)">下载</view>
+            <view
+                v-if="form.boardingPassImg"
+                @click="downloadFile(form.boardingPassImg)"
+                class="download-link"> <!-- 添加 CSS 类 -->
+            Download
+            </view>
           </el-form-item>
         </el-col>
 
@@ -261,7 +267,7 @@
             >
               <el-icon><Plus /></el-icon>
             </el-upload>
-            <view v-if="form.passportImg" @click="downloadFile(form.passportImg)">下载</view>
+            <view v-if="form.passportImg" @click="downloadFile(form.passportImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -282,7 +288,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.oldPassportImg"  @click="downloadFile(form.oldPassportImg)">下载</view>
+            <view v-if="form.oldPassportImg"  @click="downloadFile(form.oldPassportImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
 
@@ -301,7 +307,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.registrationSlipImg"  @click="downloadFile(form.registrationSlipImg)">下载</view>
+            <view v-if="form.registrationSlipImg"  @click="downloadFile(form.registrationSlipImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -322,7 +328,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.academicResultImg"  @click="downloadFile(form.academicResultImg)">下载</view>
+            <view v-if="form.academicResultImg"  @click="downloadFile(form.academicResultImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
 
@@ -341,7 +347,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.attendanceReportImg"  @click="downloadFile(form.attendanceReportImg)">下载</view>
+            <view v-if="form.attendanceReportImg"  @click="downloadFile(form.attendanceReportImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -362,7 +368,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.progressReportImg"  @click="downloadFile(form.progressReportImg)">下载</view>
+            <view v-if="form.progressReportImg"  @click="downloadFile(form.progressReportImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
 
@@ -381,7 +387,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.supportingLetterImg"  @click="downloadFile(form.supportingLetterImg)">下载</view>
+            <view v-if="form.supportingLetterImg"  @click="downloadFile(form.supportingLetterImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -402,7 +408,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.emgsPaymentImg"  @click="downloadFile(form.emgsPaymentImg)">下载</view>
+            <view v-if="form.emgsPaymentImg"  @click="downloadFile(form.emgsPaymentImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
 
@@ -421,7 +427,7 @@
             >
               <el-icon><Plus /></el-icon>
              </el-upload>
-            <view v-if="form.upmPaymentImg"  @click="downloadFile(form.upmPaymentImg)">下载</view>
+            <view v-if="form.upmPaymentImg"  @click="downloadFile(form.upmPaymentImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -442,7 +448,7 @@
             >
               <el-icon><Plus /></el-icon>
             </el-upload>
-            <view v-if="form.insuranceCoverNoteImg"  @click="downloadFile(form.insuranceCoverNoteImg)">下载</view>
+            <view v-if="form.insuranceCoverNoteImg"  @click="downloadFile(form.insuranceCoverNoteImg)" class="download-link">Download</view>
           </el-form-item>
         </el-col>
       </el-row>
@@ -462,7 +468,6 @@
       </div>
     </template>
   </el-dialog>
-
 </template>
 
 
@@ -705,7 +710,7 @@ const getFileList = (field) => {
   return []
 }
 
-// 下载文件
+// Download文件
 const downloadFile = (fileUrl) => {
   const link = document.createElement('a');
   link.href = import.meta.env.VITE_APP_BASE_API + fileUrl;
@@ -774,4 +779,15 @@ defineExpose({
   height: 148px;
   line-height: 146px;
 }
+
+.download-link {
+  color: blue; /* 蓝色 */
+  cursor: pointer; /* 手型光标 */
+  text-decoration: none; /* 去掉下划线（可选） */
+}
+
+.download-link:hover {
+  color: darkblue; /* 悬停时变为深蓝色 */
+}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
-      <el-form-item label="Insurance Company" prop="insuranceCompany">
+      <el-form-item label="Passport number" prop="passportNumber">
         <el-input
             v-model="queryParams.passportNumber"
             placeholder="Please enter Passport Number"

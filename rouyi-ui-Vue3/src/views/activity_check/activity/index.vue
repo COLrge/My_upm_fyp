@@ -1,152 +1,156 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="activity's name" prop="activityName">
+    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="120px">
+      <el-form-item label="Activity's Name" prop="activityName">
         <el-input
-          v-model="queryParams.activityName"
-          placeholder="请输入activity's name"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.activityName"
+            placeholder="Please enter activity's name"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="Open time" prop="openTime">
+      <el-form-item label="Open Time" prop="openTime">
         <el-date-picker clearable
-          v-model="queryParams.openTime"
-          type="date"
-          value-format="YYYY-MM-DD"
-          placeholder="请选择Open time">
+                        v-model="queryParams.openTime"
+                        type="date"
+                        value-format="YYYY-MM-DD"
+                        placeholder="Please select Open time">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="Close time" prop="closeTime">
+      <el-form-item label="Close Time" prop="closeTime">
         <el-date-picker clearable
-          v-model="queryParams.closeTime"
-          type="date"
-          value-format="YYYY-MM-DD"
-          placeholder="请选择Close time">
+                        v-model="queryParams.closeTime"
+                        type="date"
+                        value-format="YYYY-MM-DD"
+                        placeholder="Please select Close time">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-        <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery">Search</el-button>
+        <el-button icon="Refresh" @click="resetQuery">Reset</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['activity_check:activity:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['activity_check:activity:add']"
+        >Add</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['activity_check:activity:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['activity_check:activity:edit']"
+        >Edit</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['activity_check:activity:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['activity_check:activity:remove']"
+        >Delete</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['activity_check:activity:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['activity_check:activity:export']"
+        >Export</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="activityList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Primary key ID" align="center" prop="id" />
-      <el-table-column label="activity's name" align="center" prop="activityName" />
-      <el-table-column label="Content of the activity" align="center" prop="activityContent" />
-      <el-table-column label="Open time" align="center" prop="openTime" width="180">
+      <el-table-column label="Primary Key ID" align="center" prop="id" />
+      <el-table-column label="Activity's Name" align="center" prop="activityName" />
+      <el-table-column label="Content of the Activity" align="center" prop="activityContent" >
+        <template #default="scope">
+          <div class="no-tags" v-html="scope.row.activityContent"></div>
+        </template>
+      </el-table-column>
+      <el-table-column label="Open Time" align="center" prop="openTime" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.openTime, '{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Close time" align="center" prop="closeTime" width="180">
+      <el-table-column label="Close Time" align="center" prop="closeTime" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.closeTime, '{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Illustration image" align="center" prop="activityImage" width="100">
+      <el-table-column label="Illustration Image" align="center" prop="activityImage" width="100">
         <template #default="scope">
           <image-preview :src="scope.row.activityImage" :width="50" :height="50"/>
         </template>
       </el-table-column>
       <el-table-column label="Remarks" align="center" prop="remark" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['activity_check:activity:edit']">修改</el-button>
-          <el-button type="text" size="default" @click="book(scope.row)" >预约</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['activity_check:activity:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['activity_check:activity:edit']">Edit</el-button>
+          <el-button type="text" size="default" @click="book(scope.row)">Book</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['activity_check:activity:remove']">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
-    <!-- 添加或修改Activity list对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="activityRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="activity's name" prop="activityName">
-          <el-input v-model="form.activityName" placeholder="请输入activity's name" />
+    <!-- Add or Edit Activity List Dialog -->
+    <el-dialog :title="title" v-model="open" width="1000px" append-to-body>
+      <el-form ref="activityRef" :model="form" :rules="rules" label-width="200px">
+        <el-form-item label="Activity's Name" prop="activityName">
+          <el-input v-model="form.activityName" placeholder="Please enter activity's name" />
         </el-form-item>
-        <el-form-item label="Content of the activity">
+        <el-form-item label="Content of the Activity">
           <editor v-model="form.activityContent" :min-height="192"/>
         </el-form-item>
-        <el-form-item label="Open time" prop="openTime">
+        <el-form-item label="Open Time" prop="openTime">
           <el-date-picker clearable
-            v-model="form.openTime"
-            type="datetime"
-            value-format="YYYY-MM-DD HH:mm"
-            placeholder="请选择Open time">
+                          v-model="form.openTime"
+                          type="datetime"
+                          value-format="YYYY-MM-DD HH:mm"
+                          placeholder="Please select Open time">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="Illustration image" prop="activityImage">
+        <el-form-item label="Illustration Image" prop="activityImage">
           <image-upload v-model="form.activityImage"/>
         </el-form-item>
         <el-form-item label="Remarks" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入Remarks" />
+          <el-input v-model="form.remark" placeholder="Please enter remarks" />
         </el-form-item>
-        <el-form-item label="Close time" prop="closeTime">
+        <el-form-item label="Close Time" prop="closeTime">
           <el-date-picker clearable
-            v-model="form.closeTime"
-            type="datetime"
-            value-format="YYYY-MM-DD HH:mm"
-            placeholder="请选择Close time">
+                          v-model="form.closeTime"
+                          type="datetime"
+                          value-format="YYYY-MM-DD HH:mm"
+                          placeholder="Please select Close time">
           </el-date-picker>
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+          <el-button type="primary" @click="submitForm">Confirm</el-button>
+          <el-button @click="cancel">Cancel</el-button>
         </div>
       </template>
     </el-dialog>
@@ -155,7 +159,7 @@
 
 <script setup name="Activity">
 import { ref, reactive, toRefs, getCurrentInstance } from 'vue';
-import { useRouter } from 'vue-router'; // 引入 Vue Router 的组合式 API
+import { useRouter } from 'vue-router'; // Import Vue Router's Composition API
 import { listActivity, getActivity, delActivity, addActivity, updateActivity } from "@/api/activity_check/activity";
 import { addAppointment_record } from "@/api/appointment_record/appointment_record.js";
 import useUserStore from "@/store/modules/user.js";
@@ -185,14 +189,14 @@ const data = reactive({
   },
   rules: {
     activityName: [
-      { required: true, message: "activity's name不能为空", trigger: "blur" }
+      { required: true, message: "Activity's name cannot be empty", trigger: "blur" }
     ],
   }
 });
 
 const { queryParams, form, rules } = toRefs(data);
 
-/** 查询Activity list列表 */
+/** Query Activity List */
 function getList() {
   loading.value = true;
   listActivity(queryParams.value).then(response => {
@@ -202,13 +206,13 @@ function getList() {
   });
 }
 
-// 取消按钮
+// Cancel button
 function cancel() {
   open.value = false;
   reset();
 }
 
-// 表单重置
+// Form reset
 function reset() {
   form.value = {
     id: null,
@@ -226,47 +230,47 @@ function reset() {
   proxy.resetForm("activityRef");
 }
 
-/** 搜索按钮操作 */
+/** Search button operation */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** Reset button operation */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 
-// 多选框选中数据
+// Handle selection change
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
+/** Add button operation */
 function handleAdd() {
   reset();
   open.value = true;
-  title.value = "添加Activity list";
+  title.value = "Add Activity List";
 }
 
-/** 修改按钮操作 */
+/** Edit button operation */
 function handleUpdate(row) {
   reset();
   const _id = row.id || ids.value
   getActivity(_id).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改Activity list";
+    title.value = "Edit Activity List";
   });
 }
 
-/** 新增预约 */
+/** Add Appointment */
 const book = async (row) => {
   try {
-    // 弹出消息盒子确认是否预约
+    // Confirm if the user wants to make an appointment
     const confirm = await proxy.$confirm(
         'Are you sure you want to make an appointment? ' +
         '<br>You can change the default appointment time later in the appointment list.',
@@ -280,21 +284,19 @@ const book = async (row) => {
     );
 
     if (confirm) {
-      // 获取 user store 实例
+      // Get user store instance
       const userStore = useUserStore();
-      // 确保用户信息已经加载
+      // Ensure user info is loaded
       if (!userStore.id || !userStore.name) {
-        await userStore.getInfo(); // 获取用户信息（如果没有获取过）
+        await userStore.getInfo(); // Fetch user info if not already fetched
       }
 
-      // 从 Vuex Store 获取用户信息
-      const userId = userStore.id; // 用户ID
-      const userName = userStore.name; // 用户名
+      // Get user info from Vuex Store
+      const userId = userStore.id; // User ID
+      const userName = userStore.name; // User Name
       const roles = userStore.roles
 
-      //转换数据类型
-
-      // 构造新预约记录
+      // Construct new appointment record
       const newRecord = {
         activityId: row.id,
         appointmentName: row.activityName,
@@ -304,33 +306,33 @@ const book = async (row) => {
         appointmentTime: '1',
       };
 
-      // 调用新增预约记录的接口
+      // Call API to add appointment record
       await addAppointment_record(newRecord);
-      proxy.$message.success('Record created successful');
+      proxy.$message.success('Record created successfully');
     }
   } catch (error) {
     if (error === 'cancel') {
-      // 用户点击了取消，无需操作
-      proxy.$message.info('Cancel creating');
+      // User clicked cancel, no action needed
+      proxy.$message.info('Appointment creation canceled');
     } else {
-      proxy.$message.error('creating fail' + error.message);
+      proxy.$message.error('Failed to create appointment: ' + error.message);
     }
   }
 };
 
-/** 提交按钮 */
+/** Submit form */
 function submitForm() {
   proxy.$refs["activityRef"].validate(valid => {
     if (valid) {
       if (form.value.id != null) {
         updateActivity(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          proxy.$modal.msgSuccess("Update successful");
           open.value = false;
           getList();
         });
       } else {
         addActivity(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          proxy.$modal.msgSuccess("Add successful");
           open.value = false;
           getList();
         });
@@ -339,18 +341,18 @@ function submitForm() {
   });
 }
 
-/** 删除按钮操作 */
+/** Delete button operation */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除Activity list编号为"' + _ids + '"的数据项？').then(function() {
+  proxy.$modal.confirm('Are you sure you want to delete the activity with ID "' + _ids + '"?').then(function() {
     return delActivity(_ids);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    proxy.$modal.msgSuccess("Delete successful");
   }).catch(() => {});
 }
 
-/** 导出按钮操作 */
+/** Export button operation */
 function handleExport() {
   proxy.download('activity_check/activity/export', {
     ...queryParams.value
@@ -359,3 +361,9 @@ function handleExport() {
 
 getList();
 </script>
+
+<style scoped>
+.no-tags p {
+  display: none;
+}
+</style>

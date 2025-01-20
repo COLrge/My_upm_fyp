@@ -10,7 +10,7 @@
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
-        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+        <el-tooltip content="Layout size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
@@ -23,13 +23,13 @@
           <template #dropdown>
             <el-dropdown-menu>
               <router-link to="/user/profile">
-                <el-dropdown-item>个人中心</el-dropdown-item>
+                <el-dropdown-item>Profile</el-dropdown-item>
               </router-link>
               <el-dropdown-item command="setLayout" v-if="settingsStore.showSettings">
-                <span>布局设置</span>
+                <span>Layout setting</span>
               </el-dropdown-item>
               <el-dropdown-item divided command="logout">
-                <span>退出登录</span>
+                <span>Log out</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -75,9 +75,9 @@ function handleCommand(command) {
 }
 
 function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('Are you sure you want to log out and exit the system?', 'Prompt', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
     type: 'warning'
   }).then(() => {
     userStore.logOut().then(() => {
