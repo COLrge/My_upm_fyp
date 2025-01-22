@@ -87,7 +87,7 @@ public class VisaApplicationController extends BaseController
         visaApplication.setApplicantId(loginUser.getUserId());
         // 检查是否存在进行中的申请
         if (visaApplicationService.hasActiveApplication(loginUser.getUserId())) {
-            return AjaxResult.error("已存在正在处理中的签证申请");
+            return AjaxResult.error("Visa applications already exist and are being processed");
         }
         
         visaApplication.setStatus("SUBMITTED");

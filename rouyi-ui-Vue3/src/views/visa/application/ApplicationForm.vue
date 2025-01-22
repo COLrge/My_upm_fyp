@@ -567,6 +567,9 @@ const data = reactive({
     travelDocumentIssueDate: [{required: true, message: "Travel Document Issue Date is required", trigger: "blur"}],
     travelDocumentExpiryDate: [{required: true, message: "Travel Document Expiry Date is required", trigger: "blur"}],
     lastEntryDate: [{required: true, message: "Latest Entry Date is required", trigger: "blur"}],
+    insuranceCompany: [{required: true, message: "Insurance company is required", trigger: "blur"}],
+    travelDocumentType: [{required: true, message: "this is required", trigger: "change"}],
+    currentPassType: [{required: true, message: "this is required", trigger: "change"}],
   }
 });
 

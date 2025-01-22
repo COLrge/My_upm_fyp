@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.appointment.mapper.VisaExpiryMapper">
+    
+    <resultMap type="VisaExpiry" id="VisaExpiryResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="visaExpiryDate"    column="visa_expiry_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVisaExpiryVo">
+        select id, user_id, user_name, visa_expiry_date, create_by, create_time, update_time from visa_expiry
+    </sql>
+
+    <select id="selectVisaExpiryDateByUserId" parameterType="java.lang.Long" resultType="java.util.Date">
+        SELECT visa_expiry_date
+        FROM visa_expiry  -- 请替换为实际的表名
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectVisaExpiryList" parameterType="VisaExpiry" resultMap="VisaExpiryResult">
+        <include refid="selectVisaExpiryVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="visaExpiryDate != null "> and visa_expiry_date = #{visaExpiryDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectVisaExpiryById" parameterType="Long" resultMap="VisaExpiryResult">
+        <include refid="selectVisaExpiryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertVisaExpiry" parameterType="VisaExpiry" useGeneratedKeys="true" keyProperty="id">
+        insert into visa_expiry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="visaExpiryDate != null">visa_expiry_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="visaExpiryDate != null">#{visaExpiryDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVisaExpiry" parameterType="VisaExpiry">
+        update visa_expiry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="visaExpiryDate != null">visa_expiry_date = #{visaExpiryDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVisaExpiryById" parameterType="Long">
+        delete from visa_expiry where id = #{id}
+    </delete>
+
+    <delete id="deleteVisaExpiryByIds" parameterType="String">
+        delete from visa_expiry where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
