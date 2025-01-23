@@ -39,14 +39,14 @@
     </el-row>
 
     <el-table v-loading="loading" :data="applicationList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="selection" width="50" align="center" />
       <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="Applicant ID" align="center" prop="applicantId" />
       <el-table-column label="Name" align="center" prop="name" />
       <el-table-column label="Matric Number" align="center" prop="matricNumber" />
       <el-table-column label="Passport Number" align="center" prop="passportNumber" />
       <el-table-column label="Email" align="center" prop="email" />
-      <el-table-column label="Nationality" align="center" prop="nationality" />
+      <el-table-column label="Nationality" align="center" prop="nationality" width="100" />
       <el-table-column label="Course Name" align="center" prop="courseName" />
 <!--      <el-table-column label="审核备注" align="center" prop="Remarks" />-->
       <el-table-column label="Status" align="center" prop="status" width="150">

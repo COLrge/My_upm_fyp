@@ -1,5 +1,5 @@
 <template>
-
+  <div class="card" style="margin-top: 20px;"></div>
   <div class="reviewer-container">
     <!-- Staff Information Card -->
     <el-card class="reviewer-info" v-loading="loading">
@@ -70,6 +70,10 @@
       </el-empty>
     </el-card>
 
+    <div>
+      <div class="card" style="margin-bottom: 20px;"></div>
+    </div>
+
     <!-- Separate Visa Reminder Card -->
     <el-card class="visa-reminder" v-loading="visaLoading">
       <template #header>
@@ -126,6 +130,8 @@
       </el-empty>
     </el-card>
   </div>
+
+  <div class="card" style="margin-top: 20px;"></div>
 
   <div class="welcome-container">
     <!-- 欢迎标题 -->

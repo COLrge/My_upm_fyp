@@ -270,7 +270,19 @@ function handleUpdate(row) {
 /** Add Appointment */
 const book = async (row) => {
   try {
-    // Confirm if the user wants to make an appointment
+    // 获取当前时间
+    const currentTime = new Date();
+
+    // 解析 openTime 字符串为 Date 对象
+    const openTime = new Date(row.openTime);
+
+    // 如果当前时间大于 openTime，则不允许预约
+    if (currentTime > openTime) {
+      proxy.$message.error('Cannot make an appointment, the time has passed.');
+      return;
+    }
+
+    // 确认用户是否要进行预约
     const confirm = await proxy.$confirm(
         'Are you sure you want to make an appointment? ' +
         '<br>You can change the default appointment time later in the appointment list.',
@@ -284,19 +296,17 @@ const book = async (row) => {
     );
 
     if (confirm) {
-      // Get user store instance
+      // 获取用户信息
       const userStore = useUserStore();
-      // Ensure user info is loaded
       if (!userStore.id || !userStore.name) {
-        await userStore.getInfo(); // Fetch user info if not already fetched
+        await userStore.getInfo(); // 如果用户信息未加载，先加载
       }
 
-      // Get user info from Vuex Store
-      const userId = userStore.id; // User ID
-      const userName = userStore.name; // User Name
-      const roles = userStore.roles
+      const userId = userStore.id; // 用户ID
+      const userName = userStore.name; // 用户姓名
+      const roles = userStore.roles;
 
-      // Construct new appointment record
+      // 创建新的预约记录
       const newRecord = {
         activityId: row.id,
         appointmentName: row.activityName,
@@ -306,13 +316,13 @@ const book = async (row) => {
         appointmentTime: '1',
       };
 
-      // Call API to add appointment record
+      // 调用 API 创建预约记录
       await addAppointment_record(newRecord);
       proxy.$message.success('Record created successfully');
     }
   } catch (error) {
     if (error === 'cancel') {
-      // User clicked cancel, no action needed
+      // 用户点击取消，什么也不做
       proxy.$message.info('Appointment creation canceled');
     } else {
       proxy.$message.error('Failed to create appointment: ' + error.message);

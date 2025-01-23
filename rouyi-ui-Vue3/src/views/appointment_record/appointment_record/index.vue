@@ -59,7 +59,12 @@
       <el-table-column label="Appointment name" align="center" prop="appointmentName" />
       <el-table-column label="User ID" align="center" prop="userId" />
       <el-table-column label="User name" align="center" prop="userName" />
-      <el-table-column label="Appointment time" align="center" prop="appointmentTime">
+      <el-table-column
+          label="Appointment time"
+          align="center"
+          prop="appointmentTime"
+          sortable
+      >
         <template #default="scope">
           <dict-tag :options="visa_appointment_time" :value="scope.row.appointmentTime"/>
         </template>
