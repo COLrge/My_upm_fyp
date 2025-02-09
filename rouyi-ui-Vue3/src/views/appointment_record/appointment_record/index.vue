@@ -165,7 +165,7 @@ const { queryParams, form, rules } = toRefs(data);
 const userStore = useUserStore();
 
 // Ensure ID is converted to BigInt for comparison
-const ADMIN_IDS = [BigInt(1), BigInt(5)];
+const ADMIN_IDS = [BigInt(1), BigInt(5),BigInt(6),BigInt(8),BigInt(9),BigInt(10)];
 
 async function getList() {
   // Ensure user info is loaded

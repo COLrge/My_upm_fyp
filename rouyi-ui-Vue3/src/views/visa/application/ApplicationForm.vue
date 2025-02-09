@@ -681,6 +681,7 @@ const resetForm = () => {
   });
   applicationRef.value?.resetFields();
 };
+
 // 添加文件上传相关的响应式数据
 const uploadFileUrl = import.meta.env.VITE_APP_BASE_API + '/common/upload'
 const headers = ref({
@@ -705,23 +706,31 @@ const handleUploadError = () => {
 // 获取文件列表用于回显
 const getFileList = (field) => {
   if (form.value[field]) {
-    return [{
-      name: form.value[field].split('/').pop(),
-      url: import.meta.env.VITE_APP_BASE_API + form.value[field]
-    }]
+    // 确保 URL 是完整的，不再重复拼接
+    return [
+      {
+        name: form.value[field].split('/').pop(), // 提取文件名
+        url: form.value[field], // 使用完整 URL
+      },
+    ];
   }
-  return []
-}
+  return [];
+};
 
-// Download文件
+// 下载文件
 const downloadFile = (fileUrl) => {
-  const link = document.createElement('a');
-  link.href = import.meta.env.VITE_APP_BASE_API + fileUrl;
-  link.download = fileUrl.split('/').pop();
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
+  try {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileUrl.split('/').pop(); // 使用文件名作为下载名称
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error('Download failed:', error);
+    ElMessage.error('File download failed');
+  }
+};
 
 defineExpose({
   dialogVisible,

@@ -20,7 +20,6 @@ import com.ruoyi.appointment.domain.VisaExpiry;
 import com.ruoyi.appointment.service.IVisaExpiryService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
-import java.util.Date;
 
 /**
  * store_expirydayController
@@ -45,17 +44,6 @@ public class VisaExpiryController extends BaseController
         startPage();
         List<VisaExpiry> list = visaExpiryService.selectVisaExpiryList(visaExpiry);
         return getDataTable(list);
-    }
-
-    /**
-     * 根据用户ID查询签证过期时间
-     */
-    @PreAuthorize("@ss.hasPermi('expiryday:expiry:query')")
-    @GetMapping("/visaExpiryDate/{userId}")
-    public AjaxResult getVisaExpiryDateByUserId(@PathVariable("userId") Long userId)
-    {
-        Date visaExpiryDate = visaExpiryService.selectVisaExpiryDateByUserId(userId);
-        return success(visaExpiryDate);
     }
 
     /**

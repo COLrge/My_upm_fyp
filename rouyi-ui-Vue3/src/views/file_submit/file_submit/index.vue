@@ -171,7 +171,7 @@ const idpin = (row, column, cellValue, index) => {
 const userStore = useUserStore();
 
 // Ensure ID is converted to BigInt for comparison
-const ADMIN_IDS = [BigInt(1), BigInt(5)];
+const ADMIN_IDS = [BigInt(1), BigInt(5),BigInt(6),BigInt(8),BigInt(9),BigInt(10)];
 
 async function getList() {
   // Ensure user info is loaded
@@ -230,7 +230,7 @@ function reset() {
 /** Generate QR */
 function handleGenerateQR(row) {
   const idpinValue = idpin(row); // Call idpin method to get idpin value
-  const qrUrl = `http://localhost/submission/QR_submit?pin=${idpinValue}`;
+  const qrUrl = `http://34.96.216.198/submission/QR_submit?pin=${idpinValue}`;
   window.location.href = qrUrl; // Redirect to QR generation page
 }
 

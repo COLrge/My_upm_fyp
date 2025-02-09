@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://localhost:3306/visa-management?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-                username: root
-                password: "0000"
+                url: jdbc:mysql://34.96.216.198/visa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                username: visa
+                password: "123456"
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭

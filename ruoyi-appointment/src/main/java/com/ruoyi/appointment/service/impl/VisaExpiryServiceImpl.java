@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.appointment.mapper.VisaExpiryMapper;
 import com.ruoyi.appointment.domain.VisaExpiry;
 import com.ruoyi.appointment.service.IVisaExpiryService;
-import java.util.Date;
 
 /**
  * store_expirydayService业务层处理
@@ -18,18 +17,6 @@ import java.util.Date;
 @Service
 public class VisaExpiryServiceImpl implements IVisaExpiryService 
 {
-    /**
-     * 根据用户ID查询签证过期时间
-     *
-     * @param userId 用户ID
-     * @return 签证过期时间
-     */
-    @Override
-    public Date selectVisaExpiryDateByUserId(Long userId)
-    {
-        return visaExpiryMapper.selectVisaExpiryDateByUserId(userId);
-    }
-
     @Autowired
     private VisaExpiryMapper visaExpiryMapper;
 

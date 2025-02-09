@@ -1,6 +1,5 @@
 package com.ruoyi.appointment.mapper;
 
-import java.util.Date;
 import java.util.List;
 import com.ruoyi.appointment.domain.VisaExpiry;
 
@@ -12,14 +11,6 @@ import com.ruoyi.appointment.domain.VisaExpiry;
  */
 public interface VisaExpiryMapper 
 {
-    /**
-     * 根据用户ID查询签证过期时间
-     *
-     * @param userId 用户ID
-     * @return 签证过期时间
-     */
-    public Date selectVisaExpiryDateByUserId(Long userId);
-
     /**
      * 查询store_expiryday
      * 

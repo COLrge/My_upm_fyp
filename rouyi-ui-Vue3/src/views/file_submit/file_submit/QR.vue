@@ -25,7 +25,7 @@ function getQueryParam(param) {
 
 onMounted(() => {
   qrPin.value = getQueryParam("pin");
-  qrValue.value = `http://localhost/submission/QR_submit?pin=${qrPin.value}`;
+  qrValue.value = `http://34.96.216.198/submission/QR_submit?pin=${qrPin.value}`;
 });
 </script>
 

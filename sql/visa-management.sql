@@ -11,7 +11,7 @@
  Target Server Version : 80040 (8.0.40)
  File Encoding         : 65001
 
- Date: 23/01/2025 00:34:25
+ Date: 24/01/2025 03:57:08
 */
 
 SET NAMES utf8mb4;
@@ -194,16 +194,15 @@ CREATE TABLE `submit_state`  (
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Update Time',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Remarks',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'File Submission Status Table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'File Submission Status Table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of submit_state
 -- ----------------------------
 INSERT INTO `submit_state` VALUES (1, 'project_report.pdf', '1', 1, 'Alice', 'admin', '2025-01-16 03:08:40', NULL, '2025-01-16 03:44:13', 'First submission');
 INSERT INTO `submit_state` VALUES (2, 'application_form.docx', '2', 2, 'Bob', 'admin', '2025-01-16 03:08:40', NULL, '2025-01-16 03:44:19', 'Awaiting review');
-INSERT INTO `submit_state` VALUES (4, 'passport', '1', 3, 'user1', NULL, '2025-01-19 08:57:33', NULL, '2025-01-19 08:57:33', NULL);
-INSERT INTO `submit_state` VALUES (5, 'abcdef', '1', 3, 'user1', NULL, '2025-01-19 09:38:01', NULL, '2025-01-19 09:38:01', NULL);
-INSERT INTO `submit_state` VALUES (6, '666', '2', 1, 'admin', NULL, '2025-01-20 03:40:25', NULL, '2025-01-21 15:36:44', NULL);
+INSERT INTO `submit_state` VALUES (7, 'njhb', '2', 7, 'student1', NULL, '2025-01-23 14:03:21', NULL, '2025-01-23 16:17:10', NULL);
+INSERT INTO `submit_state` VALUES (8, 'passport', '2', 7, 'student1', NULL, '2025-01-23 15:27:44', NULL, '2025-01-23 15:29:00', NULL);
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -438,7 +437,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 271 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 303 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -614,6 +613,38 @@ INSERT INTO `sys_logininfor` VALUES (267, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (268, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', 'Verification code error', '2025-01-22 23:44:25');
 INSERT INTO `sys_logininfor` VALUES (269, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-22 23:44:31');
 INSERT INTO `sys_logininfor` VALUES (270, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 00:31:38');
+INSERT INTO `sys_logininfor` VALUES (271, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 00:35:45');
+INSERT INTO `sys_logininfor` VALUES (272, 'user1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 00:35:55');
+INSERT INTO `sys_logininfor` VALUES (273, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:11:11');
+INSERT INTO `sys_logininfor` VALUES (274, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:12:17');
+INSERT INTO `sys_logininfor` VALUES (275, 'user1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:12:30');
+INSERT INTO `sys_logininfor` VALUES (276, 'user1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:18:30');
+INSERT INTO `sys_logininfor` VALUES (277, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:18:34');
+INSERT INTO `sys_logininfor` VALUES (278, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:19:42');
+INSERT INTO `sys_logininfor` VALUES (279, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:19:45');
+INSERT INTO `sys_logininfor` VALUES (280, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:19:50');
+INSERT INTO `sys_logininfor` VALUES (281, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:20:03');
+INSERT INTO `sys_logininfor` VALUES (282, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:21:20');
+INSERT INTO `sys_logininfor` VALUES (283, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 01:21:24');
+INSERT INTO `sys_logininfor` VALUES (284, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 01:22:02');
+INSERT INTO `sys_logininfor` VALUES (285, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 13:21:50');
+INSERT INTO `sys_logininfor` VALUES (286, 'student1', '127.0.0.1', '内网IP', 'Chrome Mobile', 'Android 1.x', '0', 'Login successful', '2025-01-23 13:23:37');
+INSERT INTO `sys_logininfor` VALUES (287, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 13:50:44');
+INSERT INTO `sys_logininfor` VALUES (288, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 14:01:27');
+INSERT INTO `sys_logininfor` VALUES (289, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 14:01:31');
+INSERT INTO `sys_logininfor` VALUES (290, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 14:02:26');
+INSERT INTO `sys_logininfor` VALUES (291, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 14:02:39');
+INSERT INTO `sys_logininfor` VALUES (292, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:21:43');
+INSERT INTO `sys_logininfor` VALUES (293, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 15:29:42');
+INSERT INTO `sys_logininfor` VALUES (294, 'review1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:29:58');
+INSERT INTO `sys_logininfor` VALUES (295, 'review1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 15:30:37');
+INSERT INTO `sys_logininfor` VALUES (296, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:30:52');
+INSERT INTO `sys_logininfor` VALUES (297, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 15:32:20');
+INSERT INTO `sys_logininfor` VALUES (298, 'review1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:32:34');
+INSERT INTO `sys_logininfor` VALUES (299, 'review1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 15:32:51');
+INSERT INTO `sys_logininfor` VALUES (300, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:32:55');
+INSERT INTO `sys_logininfor` VALUES (301, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Logout successful', '2025-01-23 15:33:33');
+INSERT INTO `sys_logininfor` VALUES (302, 'student1', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', 'Login successful', '2025-01-23 15:33:45');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -818,7 +849,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 414 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 440 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1137,6 +1168,32 @@ INSERT INTO `sys_oper_log` VALUES (410, '用户管理', 2, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (411, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"/profile/avatar/2025/01/21/istockphoto-1399565382-612x612_20250121035631A001.jpg\",\"createBy\":\"admin\",\"createTime\":\"2024-12-02 09:52:59\",\"delFlag\":\"0\",\"dept\":{\"ancestors\":\"0\",\"children\":[],\"deptId\":100,\"deptName\":\"UPM\",\"leader\":\"UPMer\",\"orderNum\":0,\"params\":{},\"parentId\":0,\"status\":\"0\"},\"deptId\":113,\"email\":\"xv15611761@gmail.com\",\"loginDate\":\"2025-01-22 23:17:48\",\"loginIp\":\"127.0.0.1\",\"nickName\":\"Mr. Mohammed\",\"params\":{},\"phonenumber\":\"17846339983\",\"postIds\":[],\"roleIds\":[3],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":3,\"roleKey\":\"reviewer\",\"roleName\":\"审核员\",\"roleSort\":1,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":5,\"userName\":\"review1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-22 23:36:17', 15);
 INSERT INTO `sys_oper_log` VALUES (412, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"deptId\":113,\"nickName\":\"Mr. Hazer\",\"params\":{},\"postIds\":[],\"roleIds\":[3],\"sex\":\"0\",\"status\":\"0\",\"userId\":6,\"userName\":\"staff2\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-22 23:38:28', 79);
 INSERT INTO `sys_oper_log` VALUES (413, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2024-12-01 16:31:13\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":false,\"menuIds\":[2040,2041,2000,2001,2002,2003,2004,2005,2009,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,4],\"params\":{},\"roleId\":3,\"roleKey\":\"reviewer\",\"roleName\":\"Staff\",\"roleSort\":1,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-22 23:38:39', 17);
+INSERT INTO `sys_oper_log` VALUES (414, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2024-11-30 10:29:36\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":false,\"menuIds\":[2000,2002,2003,2004,2005,2006,2007,2008,2011,2013,2014,2018,2019,2020,2021,2022,2024,2025,2026,2027,2028,2029,2031,2032,4],\"params\":{},\"remark\":\"普通角色\",\"roleId\":2,\"roleKey\":\"common\",\"roleName\":\"Student\",\"roleSort\":2,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:12:00', 39);
+INSERT INTO `sys_oper_log` VALUES (415, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2024-12-01 16:31:13\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":false,\"menuIds\":[2040,2041,2000,2002,2003,2004,2005,2009,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,4],\"params\":{},\"roleId\":3,\"roleKey\":\"reviewer\",\"roleName\":\"Staff\",\"roleSort\":1,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:12:11', 18);
+INSERT INTO `sys_oper_log` VALUES (416, '用户头像', 2, 'com.ruoyi.web.controller.system.SysProfileController.avatar()', 'POST', 1, 'user1', 'Multimedia', '/system/user/profile/avatar', '127.0.0.1', '内网IP', '', NULL, 1, '文件[favicon.ico]后缀[ico]不正确，请上传[bmp, gif, jpg, jpeg, png]格式', '2025-01-23 01:15:12', 2);
+INSERT INTO `sys_oper_log` VALUES (417, '用户头像', 2, 'com.ruoyi.web.controller.system.SysProfileController.avatar()', 'POST', 1, 'user1', 'Multimedia', '/system/user/profile/avatar', '127.0.0.1', '内网IP', '', '{\"msg\":\"操作成功\",\"imgUrl\":\"/profile/avatar/2025/01/23/images_20250123011724A001.jpeg\",\"code\":200}', 0, NULL, '2025-01-23 01:17:24', 100);
+INSERT INTO `sys_oper_log` VALUES (418, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"deptId\":112,\"nickName\":\"Mycle\",\"params\":{},\"postIds\":[],\"roleIds\":[],\"sex\":\"0\",\"status\":\"0\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:19:28', 76);
+INSERT INTO `sys_oper_log` VALUES (419, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-01-23 01:19:28\",\"delFlag\":\"0\",\"dept\":{\"ancestors\":\"0,100,110\",\"children\":[],\"deptId\":112,\"deptName\":\"Multimedia\",\"orderNum\":0,\"params\":{},\"parentId\":110,\"status\":\"0\"},\"deptId\":112,\"email\":\"\",\"loginIp\":\"\",\"nickName\":\"Mycle\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[2],\"roles\":[],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:19:38', 23);
+INSERT INTO `sys_oper_log` VALUES (420, 'Activity list', 3, 'com.ruoyi.appointment.controller.VisaActivityController.remove()', 'DELETE', 1, 'admin', '研发部门', '/activity_check/activity/8', '127.0.0.1', '内网IP', '[8]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:41', 9);
+INSERT INTO `sys_oper_log` VALUES (421, 'Activity list', 3, 'com.ruoyi.appointment.controller.VisaActivityController.remove()', 'DELETE', 1, 'admin', '研发部门', '/activity_check/activity/9', '127.0.0.1', '内网IP', '[9]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:43', 9);
+INSERT INTO `sys_oper_log` VALUES (422, 'Activity list', 3, 'com.ruoyi.appointment.controller.VisaActivityController.remove()', 'DELETE', 1, 'admin', '研发部门', '/activity_check/activity/10', '127.0.0.1', '内网IP', '[10]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:44', 3);
+INSERT INTO `sys_oper_log` VALUES (423, 'File Submission Status Table', 3, 'com.ruoyi.appointment.controller.SubmitStateController.remove()', 'DELETE', 1, 'admin', '研发部门', '/file_submit/file_submit/4', '127.0.0.1', '内网IP', '[4]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:54', 0);
+INSERT INTO `sys_oper_log` VALUES (424, 'File Submission Status Table', 3, 'com.ruoyi.appointment.controller.SubmitStateController.remove()', 'DELETE', 1, 'admin', '研发部门', '/file_submit/file_submit/5', '127.0.0.1', '内网IP', '[5]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:56', 13);
+INSERT INTO `sys_oper_log` VALUES (425, 'File Submission Status Table', 3, 'com.ruoyi.appointment.controller.SubmitStateController.remove()', 'DELETE', 1, 'admin', '研发部门', '/file_submit/file_submit/6', '127.0.0.1', '内网IP', '[6]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 01:21:57', 8);
+INSERT INTO `sys_oper_log` VALUES (426, 'Activity list', 1, 'com.ruoyi.appointment.controller.VisaActivityController.add()', 'POST', 1, 'admin', '研发部门', '/activity_check/activity', '127.0.0.1', '内网IP', '{\"activityContent\":\"<p>Try every function in EI-PUTRA system</p>\",\"activityImage\":\"/profile/upload/2025/01/23/屏幕截图 2024-12-05 133401_20250123133313A001.png\",\"activityName\":\"Try EI-PUTRA\",\"closeTime\":\"2025-01-25 00:00\",\"createTime\":\"2025-01-23 13:33:17\",\"id\":11,\"openTime\":\"2025-01-24 00:00\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 13:33:17', 38);
+INSERT INTO `sys_oper_log` VALUES (427, 'Appointment list', 1, 'com.ruoyi.appointment.controller.VisaAppointmentController.add()', 'POST', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"1\",\"createTime\":\"2025-01-23 13:58:34\",\"id\":37,\"params\":{},\"roleId\":2,\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 13:58:34', 40);
+INSERT INTO `sys_oper_log` VALUES (428, 'Appointment list', 2, 'com.ruoyi.appointment.controller.VisaAppointmentController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"3\",\"createTime\":\"2025-01-23 13:58:34\",\"id\":37,\"params\":{},\"remark\":\"bbh\",\"roleId\":2,\"updateTime\":\"2025-01-23 13:58:56\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 13:58:56', 15);
+INSERT INTO `sys_oper_log` VALUES (429, 'File Submission Status Table', 1, 'com.ruoyi.appointment.controller.SubmitStateController.add()', 'POST', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 14:03:20\",\"fileName\":\"njhb\",\"id\":7,\"params\":{},\"submitStatus\":\"1\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 14:03:20', 23);
+INSERT INTO `sys_oper_log` VALUES (430, 'File Submission Status Table', 2, 'com.ruoyi.appointment.controller.SubmitStateController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 14:03:21\",\"fileName\":\"njhb\",\"id\":7,\"params\":{},\"submitStatus\":\"2\",\"updateTime\":\"2025-01-23 14:05:30\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 14:05:30', 15);
+INSERT INTO `sys_oper_log` VALUES (431, 'Appointment list', 1, 'com.ruoyi.appointment.controller.VisaAppointmentController.add()', 'POST', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"1\",\"createTime\":\"2025-01-23 15:25:24\",\"id\":38,\"params\":{},\"roleId\":2,\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 15:25:24', 40);
+INSERT INTO `sys_oper_log` VALUES (432, 'Appointment list', 1, 'com.ruoyi.appointment.controller.VisaAppointmentController.add()', 'POST', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":1,\"appointmentName\":\"Visa Application Submission\",\"appointmentTime\":\"1\",\"createTime\":\"2025-01-23 15:26:07\",\"id\":39,\"params\":{},\"roleId\":2,\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 15:26:08', 19);
+INSERT INTO `sys_oper_log` VALUES (433, 'File Submission Status Table', 1, 'com.ruoyi.appointment.controller.SubmitStateController.add()', 'POST', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 15:27:44\",\"fileName\":\"passport\",\"id\":8,\"params\":{},\"submitStatus\":\"1\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 15:27:44', 19);
+INSERT INTO `sys_oper_log` VALUES (434, 'File Submission Status Table', 2, 'com.ruoyi.appointment.controller.SubmitStateController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 15:27:44\",\"fileName\":\"passport\",\"id\":8,\"params\":{},\"submitStatus\":\"2\",\"updateTime\":\"2025-01-23 15:29:00\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 15:29:00', 20);
+INSERT INTO `sys_oper_log` VALUES (435, 'File Submission Status Table', 2, 'com.ruoyi.appointment.controller.SubmitStateController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 14:03:21\",\"fileName\":\"njhb\",\"id\":7,\"params\":{},\"submitStatus\":\"3\",\"updateTime\":\"2025-01-23 16:16:55\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 16:16:55', 14);
+INSERT INTO `sys_oper_log` VALUES (436, 'File Submission Status Table', 2, 'com.ruoyi.appointment.controller.SubmitStateController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/file_submit/file_submit', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-01-23 14:03:21\",\"fileName\":\"njhb\",\"id\":7,\"params\":{},\"submitStatus\":\"2\",\"updateTime\":\"2025-01-23 16:17:09\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 16:17:09', 12);
+INSERT INTO `sys_oper_log` VALUES (437, 'Appointment list', 2, 'com.ruoyi.appointment.controller.VisaAppointmentController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"7\",\"createTime\":\"2025-01-23 15:25:24\",\"id\":38,\"params\":{},\"roleId\":2,\"updateTime\":\"2025-01-23 16:59:42\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 16:59:42', 14);
+INSERT INTO `sys_oper_log` VALUES (438, 'Appointment list', 2, 'com.ruoyi.appointment.controller.VisaAppointmentController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"7\",\"createTime\":\"2025-01-23 13:58:34\",\"id\":37,\"params\":{},\"remark\":\"bbh\",\"roleId\":2,\"updateTime\":\"2025-01-23 16:59:50\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 16:59:50', 13);
+INSERT INTO `sys_oper_log` VALUES (439, 'Appointment list', 2, 'com.ruoyi.appointment.controller.VisaAppointmentController.edit()', 'PUT', 1, 'student1', 'Multimedia', '/appointment_record/appointment_record', '127.0.0.1', '内网IP', '{\"activityId\":11,\"appointmentName\":\"Try EI-PUTRA\",\"appointmentTime\":\"3\",\"createTime\":\"2025-01-23 13:58:34\",\"id\":37,\"params\":{},\"remark\":\"bbh\",\"roleId\":2,\"updateTime\":\"2025-01-23 16:59:54\",\"userId\":7,\"userName\":\"student1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-01-23 16:59:54', 13);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1190,8 +1247,8 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2024-11-30 10:29:36', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, 'Student', 'common', 2, '1', 0, 1, '0', '0', 'admin', '2024-11-30 10:29:36', 'admin', '2025-01-22 23:31:35', '普通角色');
-INSERT INTO `sys_role` VALUES (3, 'Staff', 'reviewer', 1, '1', 0, 1, '0', '0', 'admin', '2024-12-01 16:31:13', 'admin', '2025-01-22 23:38:39', NULL);
+INSERT INTO `sys_role` VALUES (2, 'Student', 'common', 2, '1', 0, 1, '0', '0', 'admin', '2024-11-30 10:29:36', 'admin', '2025-01-23 01:12:00', '普通角色');
+INSERT INTO `sys_role` VALUES (3, 'Staff', 'reviewer', 1, '1', 0, 1, '0', '0', 'admin', '2024-12-01 16:31:13', 'admin', '2025-01-23 01:12:11', NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1222,7 +1279,6 @@ CREATE TABLE `sys_role_menu`  (
 -- ----------------------------
 INSERT INTO `sys_role_menu` VALUES (2, 4);
 INSERT INTO `sys_role_menu` VALUES (2, 2000);
-INSERT INTO `sys_role_menu` VALUES (2, 2001);
 INSERT INTO `sys_role_menu` VALUES (2, 2002);
 INSERT INTO `sys_role_menu` VALUES (2, 2003);
 INSERT INTO `sys_role_menu` VALUES (2, 2004);
@@ -1231,7 +1287,6 @@ INSERT INTO `sys_role_menu` VALUES (2, 2006);
 INSERT INTO `sys_role_menu` VALUES (2, 2007);
 INSERT INTO `sys_role_menu` VALUES (2, 2008);
 INSERT INTO `sys_role_menu` VALUES (2, 2011);
-INSERT INTO `sys_role_menu` VALUES (2, 2012);
 INSERT INTO `sys_role_menu` VALUES (2, 2013);
 INSERT INTO `sys_role_menu` VALUES (2, 2014);
 INSERT INTO `sys_role_menu` VALUES (2, 2018);
@@ -1249,14 +1304,12 @@ INSERT INTO `sys_role_menu` VALUES (2, 2031);
 INSERT INTO `sys_role_menu` VALUES (2, 2032);
 INSERT INTO `sys_role_menu` VALUES (3, 4);
 INSERT INTO `sys_role_menu` VALUES (3, 2000);
-INSERT INTO `sys_role_menu` VALUES (3, 2001);
 INSERT INTO `sys_role_menu` VALUES (3, 2002);
 INSERT INTO `sys_role_menu` VALUES (3, 2003);
 INSERT INTO `sys_role_menu` VALUES (3, 2004);
 INSERT INTO `sys_role_menu` VALUES (3, 2005);
 INSERT INTO `sys_role_menu` VALUES (3, 2009);
 INSERT INTO `sys_role_menu` VALUES (3, 2011);
-INSERT INTO `sys_role_menu` VALUES (3, 2012);
 INSERT INTO `sys_role_menu` VALUES (3, 2013);
 INSERT INTO `sys_role_menu` VALUES (3, 2014);
 INSERT INTO `sys_role_menu` VALUES (3, 2015);
@@ -1306,17 +1359,18 @@ CREATE TABLE `sys_user`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `idx_user_id_name`(`user_id` ASC, `user_name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '/profile/avatar/2025/01/21/Screenshot 2023-04-04 213514_20250121152020A002.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-01-23 00:31:39', 'admin', '2024-11-30 10:29:36', '', '2025-01-23 00:31:38', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '/profile/avatar/2025/01/21/Screenshot 2023-04-04 213514_20250121152020A002.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-01-23 15:32:55', 'admin', '2024-11-30 10:29:36', '', '2025-01-23 15:32:55', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-11-30 10:29:36', 'admin', '2024-11-30 10:29:36', 'admin', '2024-12-01 23:21:22', '测试员');
-INSERT INTO `sys_user` VALUES (3, 112, 'user1', 'Fhami', '00', 'xv1561211761@gmail.com', '17852583694', '0', '', '$2a$10$YVe/e/MroC0IUCI.t2IIWOFhOFeX8cGop.OTEKLPSm0yIVIlh682a', '0', '0', '127.0.0.1', '2025-01-22 23:35:24', 'admin', '2024-12-02 09:51:15', 'admin', '2025-01-22 23:36:11', NULL);
+INSERT INTO `sys_user` VALUES (3, 112, 'user1', 'Fhami', '00', 'xv1561211761@gmail.com', '17852583694', '0', '/profile/avatar/2025/01/23/images_20250123011724A001.jpeg', '$2a$10$YVe/e/MroC0IUCI.t2IIWOFhOFeX8cGop.OTEKLPSm0yIVIlh682a', '0', '0', '127.0.0.1', '2025-01-23 01:12:31', 'admin', '2024-12-02 09:51:15', 'admin', '2025-01-23 01:12:30', NULL);
 INSERT INTO `sys_user` VALUES (4, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$KqqmVaPiWWdlERBynEp54eFIkx8UDuJl238DN94g0w7UWaTMppUM.', '0', '2', '', NULL, 'admin', '2024-12-02 09:51:47', '', NULL, NULL);
-INSERT INTO `sys_user` VALUES (5, 113, 'review1', 'Mr. Mohammed', '00', 'xv15611761@gmail.com', '17846339983', '0', '/profile/avatar/2025/01/21/istockphoto-1399565382-612x612_20250121035631A001.jpg', '$2a$10$NHotyXCYzwI2yKZXiXnagOssoXmIu2jE95DU89I2MG0cpAv13BQp.', '0', '0', '127.0.0.1', '2025-01-22 23:17:48', 'admin', '2024-12-02 09:52:59', 'admin', '2025-01-22 23:36:17', NULL);
+INSERT INTO `sys_user` VALUES (5, 113, 'review1', 'Mr. Mohammed', '00', 'xv15611761@gmail.com', '17846339983', '0', '/profile/avatar/2025/01/21/istockphoto-1399565382-612x612_20250121035631A001.jpg', '$2a$10$NHotyXCYzwI2yKZXiXnagOssoXmIu2jE95DU89I2MG0cpAv13BQp.', '0', '0', '127.0.0.1', '2025-01-23 15:32:35', 'admin', '2024-12-02 09:52:59', 'admin', '2025-01-23 15:32:34', NULL);
 INSERT INTO `sys_user` VALUES (6, 113, 'staff2', 'Mr. Hazer', '00', '', '', '0', '', '$2a$10$tY23mgGqGwikmr2kXMN/T.QrUbb5fk9nSLsEZU0zmtoaIYvfp2GJW', '0', '0', '', NULL, 'admin', '2025-01-22 23:38:28', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (7, 112, 'student1', 'Mycle', '00', '', '', '0', '', '$2a$10$.R/NiKWYpVW7Twc6Uy3/BejyYBuN9aXcy/JiLB/qDwfjYdggLvOdW', '0', '0', '127.0.0.1', '2025-01-23 15:33:46', 'admin', '2025-01-23 01:19:28', 'admin', '2025-01-23 15:33:45', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1352,6 +1406,7 @@ INSERT INTO `sys_user_role` VALUES (2, 2);
 INSERT INTO `sys_user_role` VALUES (3, 2);
 INSERT INTO `sys_user_role` VALUES (5, 3);
 INSERT INTO `sys_user_role` VALUES (6, 3);
+INSERT INTO `sys_user_role` VALUES (7, 2);
 
 -- ----------------------------
 -- Table structure for visa_activity
@@ -1371,16 +1426,14 @@ CREATE TABLE `visa_activity`  (
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Remarks',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_activity_name`(`activity_name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Table storing activity details' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Table storing activity details' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of visa_activity
 -- ----------------------------
 INSERT INTO `visa_activity` VALUES (1, 'Visa Application Submission', '<p>Submit your visa application documents.</p>', '2025-01-05 06:22:00', '2025-01-05 00:00:00', '/profile/upload/2025/01/05/Screenshot 2023-04-04 213514_20250105061300A001.png', 'admin', '2025-01-05 03:17:32', NULL, '2025-01-05 06:22:52', 'Initial activity');
 INSERT INTO `visa_activity` VALUES (2, 'Visa Interview', 'Attend a face-to-face interview for your visa.', '2025-01-15 10:00:00', '2025-01-15 12:00:00', '/images/visa_interview.jpg', 'admin', '2025-01-05 03:17:32', NULL, NULL, 'Scheduled interview');
-INSERT INTO `visa_activity` VALUES (8, '1134', '<p class=\"ql-align-center\">566888955</p>', '2025-01-20 00:00:00', '2025-01-22 00:00:00', NULL, NULL, '2025-01-19 03:50:34', NULL, '2025-01-19 03:52:15', 'NO');
-INSERT INTO `visa_activity` VALUES (9, '888', '<p>23333</p>', '2025-01-21 00:00:00', '2025-01-23 00:00:00', NULL, NULL, '2025-01-19 05:52:22', NULL, '2025-01-19 08:17:54', '000');
-INSERT INTO `visa_activity` VALUES (10, 'test', NULL, '2025-01-30 00:00:00', '2025-01-31 00:00:00', NULL, NULL, '2025-01-21 03:37:54', NULL, NULL, NULL);
+INSERT INTO `visa_activity` VALUES (11, 'Try EI-PUTRA', '<p>Try every function in EI-PUTRA system</p>', '2025-01-24 00:00:00', '2025-01-25 00:00:00', '/profile/upload/2025/01/23/屏幕截图 2024-12-05 133401_20250123133313A001.png', NULL, '2025-01-23 13:33:17', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for visa_application
@@ -1433,17 +1486,14 @@ CREATE TABLE `visa_application`  (
   INDEX `idx_applicant_id`(`applicant_id` ASC) USING BTREE,
   INDEX `idx_reviewer_id`(`reviewer_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Visa Application Form' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Visa Application Form' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of visa_application
 -- ----------------------------
 INSERT INTO `visa_application` VALUES (1, 3, '123', '12123', '123', '123@qq.com', '123123', '123', '2', '123', '1231', '2', '123', '123', '123', '1', '123', '2', '2024-11-28', '2024-11-28', '2024-11-21', '2024-11-07', '2024-11-14', '2', '2', '123', 'APPROVED', 5, '', '2024-11-30 00:00:00', '2025-01-19 08:41:50', 'http://localhost:8080/profile/upload/2024/12/01/454V6tRKpngz13a7017aa90601f7cfb37fdd4363512a_20241201152807A001.png', 'http://localhost:8080/profile/upload/2024/12/01/7YS6oObzVMEUdfb81225d5ed6712573b449f88d218ee_20241201154956A005.jpg', 'http://localhost:8080/profile/upload/2024/12/01/login_20241201155007A006.png', 'http://localhost:8080/profile/upload/2024/12/01/hRAWQjaHtT1013a7017aa90601f7cfb37fdd4363512a_20241201155010A007.png', 'http://localhost:8080/profile/upload/2024/12/01/454V6tRKpngz13a7017aa90601f7cfb37fdd4363512a_20241201155041A011.png', 'http://localhost:8080/profile/upload/2024/12/01/indexBg1_20241201155048A013.jpg', 'http://localhost:8080/profile/upload/2024/12/01/register_20241201155019A009.png', 'http://localhost:8080/profile/upload/2024/12/01/DqgNYRqRxlp3a3e3c8f61be1f6d840bd6be4d1e95451_20241201155013A008.jpg', 'http://localhost:8080/profile/upload/2024/12/01/show1_20241201155023A010.jpg', 'http://localhost:8080/profile/upload/2024/12/02/12_李小明_实验报告1--MyBatis基本应用_20241202145907A005.docx', 'http://localhost:8080/profile/upload/2024/12/01/class_03871408ef90dc0c4b3023609710_20241201155043A012.png');
-INSERT INTO `visa_application` VALUES (2, 3, '123', '3123', '123', '123@qq.com', '123', '123', '1', '12', '3123', '2', '12', '123', '312', '1', '2', '1', '2024-12-11', '2024-12-20', '2024-12-20', '2024-12-19', '2024-12-28', '1', '2', '12', 'APPROVED', 5, '123123', '2024-12-02 10:36:13', '2024-12-02 10:49:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `visa_application` VALUES (3, 3, '张三', '123', '12', 'xv1561211761@gmail.com', '3123', '123', '1', '123', '17852583694', '1', '31', '12', '231', '1', '5', '1', '2024-12-11', '2024-12-23', '2024-12-27', '2024-12-17', '2024-12-27', '2', '2', '12312', 'APPROVED', 5, '你通过了', '2024-12-02 14:56:40', '2024-12-02 14:57:45', 'http://localhost:8080/profile/upload/2024/12/02/454V6tRKpngz13a7017aa90601f7cfb37fdd4363512a_20241202145212A001.png', 'http://localhost:8080/profile/upload/2024/12/02/454V6tRKpngz13a7017aa90601f7cfb37fdd4363512a_20241202145328A003.png', NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost:8080/profile/upload/2024/12/02/GQ9rVU1QvQv013a7017aa90601f7cfb37fdd4363512a_20241202145331A004.png', NULL, NULL);
-INSERT INTO `visa_application` VALUES (4, 1, '若依', '123', '1', 'ry@163.com', '23123', '123', '2', '123', '15888888888', '2', '123', '1231', '123', '1', '5', '1', '2024-12-19', '2024-12-19', '2024-12-05', '2024-12-03', '2024-12-05', '2', '2', '123', 'APPROVED', 5, '', '2024-12-02 23:27:09', '2025-01-20 03:40:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `visa_application` VALUES (6, 1, '若依', '123123', '12313', 'ry@163.com', '123123', '123123', '1', '12313', '15888888888', '1', '123123', '31231', '123123', '1', '1', '1', '2025-01-24', '2025-01-14', '2025-01-03', '2024-12-31', '2025-01-09', '1', '1', '132131', 'APPROVED', 5, '', '2025-01-22 01:16:11', '2025-01-22 23:40:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `visa_application` VALUES (7, 1, '若依', '546456', '4564', 'ry@163.com', '456546', '4645', '1', '4564', '15888888888', '1', '456456', '4564', '64564', '1', '1', '1', '2025-01-15', '2025-01-15', '2025-01-29', '2025-01-30', '2025-01-23', '1', '1', '456464', 'UNDER_REVIEW', 6, '46456', '2025-01-22 23:56:30', '2025-01-22 23:56:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `visa_application` VALUES (8, 7, 'Mycle', '218576', 'P03388449930', '217573@student.upm.edu.my', 'SERDANG ', 'jedddah', '1', 'yemeni ', '60197586476', '1', 'computer science ', 'hfhf', 'Ahmed Ali ', '1', '3', '1', '2025-01-14', '2025-01-06', '2025-01-01', '2021-06-08', '2025-01-21', '1', '3', 'hhhh', 'APPROVED', 5, '', '2025-01-23 13:57:28', '2025-01-23 14:02:20', 'http://localhost:8080/profile/upload/2025/01/23/test image_20250123135720A001.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `visa_application` VALUES (9, 7, 'Mycle', 'dsfsdfsdfs', 'dsfsdfsdds', 'dfsds@dfsdf.com', 'dfsdfs', 'sfsdfsd', '2', 'hhhh', '55666665', '1', 'hyuguy', 'gfdgdg', 'sdfdsfsd', '1', '1', '1', '2025-01-01', '2025-01-01', '2025-01-02', '2025-01-02', '2025-01-02', '1', '1', 'dsfsdf', 'UNDER_REVIEW', 5, 'sdfsdf', '2025-01-23 15:32:05', '2025-01-23 15:33:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for visa_appointment
@@ -1467,19 +1517,16 @@ CREATE TABLE `visa_appointment`  (
   INDEX `visa_appointment_ibfk_1`(`activity_id` ASC) USING BTREE,
   CONSTRAINT `visa_appointment_ibfk_1` FOREIGN KEY (`activity_id`) REFERENCES `visa_activity` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `visa_appointment_ibfk_2` FOREIGN KEY (`appointment_name`) REFERENCES `visa_activity` (`activity_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Table storing appointment details' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Table storing appointment details' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of visa_appointment
 -- ----------------------------
 INSERT INTO `visa_appointment` VALUES (1, 1, 'Visa Application Submission', 1001, 'John Doe', '7', 2, 'admin', '2025-01-06 12:44:04', NULL, '2025-01-09 03:54:04', 'First appointment');
 INSERT INTO `visa_appointment` VALUES (2, 2, 'Visa Interview', 1002, 'Jane Smith', '2', 3, 'admin', '2025-01-06 12:44:04', NULL, '2025-01-19 04:55:14', 'Interview confirmed');
-INSERT INTO `visa_appointment` VALUES (30, 9, '888', 1, 'admin', '3', 2, NULL, '2025-01-19 08:18:05', NULL, '2025-01-19 08:18:13', NULL);
-INSERT INTO `visa_appointment` VALUES (31, 9, '888', 3, 'user1', '4', 2, NULL, '2025-01-19 09:04:08', NULL, '2025-01-20 19:47:29', NULL);
-INSERT INTO `visa_appointment` VALUES (33, 10, 'test', 1, 'admin', '4', 2, NULL, '2025-01-21 03:37:58', NULL, '2025-01-21 03:44:58', NULL);
-INSERT INTO `visa_appointment` VALUES (34, 10, 'test', 3, 'user1', '3', 2, NULL, '2025-01-21 03:50:12', NULL, '2025-01-21 03:51:07', NULL);
-INSERT INTO `visa_appointment` VALUES (35, 10, 'test', 3, 'user1', '1', 2, NULL, '2025-01-21 03:50:36', NULL, NULL, NULL);
-INSERT INTO `visa_appointment` VALUES (36, 10, 'test', 1, 'admin', '4', 2, NULL, '2025-01-21 15:31:12', NULL, '2025-01-21 15:31:58', NULL);
+INSERT INTO `visa_appointment` VALUES (37, 11, 'Try EI-PUTRA', 7, 'student1', '3', 2, NULL, '2025-01-23 13:58:34', NULL, '2025-01-23 16:59:54', 'bbh');
+INSERT INTO `visa_appointment` VALUES (38, 11, 'Try EI-PUTRA', 7, 'student1', '7', 2, NULL, '2025-01-23 15:25:24', NULL, '2025-01-23 16:59:42', NULL);
+INSERT INTO `visa_appointment` VALUES (39, 1, 'Visa Application Submission', 7, 'student1', '1', 2, NULL, '2025-01-23 15:26:08', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for visa_expiry
